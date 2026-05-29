@@ -1,5 +1,5 @@
 import ollama
-from Terminal.cv.readfile import cv_file, job_des_file
+from readfile import cv_file, job_des_file
 #create client
 client = ollama.Client()
 #define model

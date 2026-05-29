@@ -1,7 +1,7 @@
 def cv_file(): 
 
-    cv_file_path = input("Give file path: ")
-    #file_name1 = "C:/Users/nasra/Documents/cv-analyzer/cv/cv.txt"
+    cv_file_path = input("Give file path for CV: ")
+    #file_name1 = "C:/Users/nasra/Documents/cv-analyzer/TextFiles/cv.txt"
     try:
         #returns file object
         with open(cv_file_path, "r") as file:
@@ -13,8 +13,8 @@ def cv_file():
         print("You do not have permission to read that file")
 
 def job_des_file():
-    job_des_file_path = input("Give file path for the job description")
-    #file_name = "C:/Users/nasra/Documents/cv-analyzer/cv/job.txt"
+    job_des_file_path = input("Give file path for the job description: ")
+    #file_name = "C:/Users/nasra/Documents/cv-analyzer/TextFiles/job.txt"
     try:
         #returns file object
         with open(job_des_file_path, "r") as file:

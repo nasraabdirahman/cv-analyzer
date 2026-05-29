@@ -8,7 +8,7 @@ model = "llama3"
 cv = cv_file()
 job = job_des_file()
 
-#print(f""" {cv}, {job} """)
+
 #specify what ollama should do
 prompt = f"""
 You are recruter. 

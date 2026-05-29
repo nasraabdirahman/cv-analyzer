@@ -1,0 +1,15 @@
+Requirements:
+You have relevant education, for example a university degree in computer/systems science, economics or equivalent, or higher post-secondary education in Business Intelligence.
+You have at least 3 years of documented experience of at least 50% of full-time in developing and implementing Power BI reports.
+You have experience with BI reports or output data from business systems in municipal or regional operations.
+You can perform complex data modeling in Power BI.
+You have advanced knowledge of Power Query and can write and optimize DAX functions.
+You have good modeling skills and experience in integrating and processing data from several different data sources, including SQL Server, Excel and other third-party sources.
+You have good knowledge of system integration with business systems.
+You have good knowledge of performance optimization in Power BI reports.
+You have very good knowledge of Swedish, both spoken and written.
+You have a good ability to understand and work with output data from municipal business systems.
+You work in a structured way and document your work in a clear way.
+You have good experience in collaborating in teams and with IT units and other stakeholders.
+You have good knowledge of GDPR and how the regulations affect the handling and storage of data.
+You have experience in at least two similar assignments.

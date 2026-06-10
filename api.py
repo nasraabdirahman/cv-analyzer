@@ -20,3 +20,5 @@ response = client.generate(model = model, prompt=prompt)
 #print response
 print("Response from Ollama:")
 print(response.response)
+
+print("Hello, Berk")

@@ -38,6 +38,7 @@ header{
 }
 
 .title{
+  padding: 15px;
   font-family: "Stack Sans Headline Title", sans-serif;
   font-size: 30px;
 }
@@ -52,11 +53,23 @@ header{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: left;
+  text-align: left;
   width: 60%;
 }
 
-.job-title, .job-location, .job-description{
+.job-title-section{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.job-title, .job-publish-date{
+  display: inline-flex;
+  padding-right: 20px;
+}
+
+.job-title, .job-location, .job-description, .job-publish-date{
   margin: 0px;
 }
 
@@ -67,6 +80,20 @@ header{
   align-items: center;
   white-space: pre-line;
   padding-top: 0px;
+}
+
+.standard-button{
+  background-color: var(--first-accent-colour);
+  color: var(--secondary-colour);
+  border: 0px ;
+  border-radius: 99px ;
+  width: 15% ;
+  padding: 18px 0px ;
+  margin: 15px;
+}
+
+.standard-button:hover{
+  background-color: var(--third-accent-colour);
 }
 
 
@@ -81,12 +108,12 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 10px;
+  padding: 20px 20px 5px 20px;
   margin: 10px;
 }
 
+.job-link,
 .main-body-text-link{
-  font-family:  "Stack Sans Headline Maintext", sans-serif;
   text-decoration: none;
   color: var(--first-accent-colour);
 }
@@ -111,6 +138,7 @@ footer {
   cursor: pointer;
   z-index: 1;
   color: var(--secondary-colour);
+  font-size: 14px;
 }
 
 .scheme-switcher_slider {

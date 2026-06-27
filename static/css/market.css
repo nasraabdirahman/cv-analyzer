@@ -1,0 +1,39 @@
+.jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    width: 90%;
+    margin: 30px auto;
+}
+
+.job-card {
+    border: 1px solid #4f8cff;
+    border-radius: 25px;
+
+    padding: 30px;
+
+    background-color: white;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.job-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.job-title {
+    font-size: 32px;
+    font-weight: bold;
+    text-decoration: underline;
+
+    margin-bottom: 20px;
+}
+
+.job-company {
+    font-size: 22px;
+    color: #555;
+}

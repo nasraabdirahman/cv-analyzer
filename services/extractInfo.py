@@ -3,8 +3,6 @@ from database.redisClient import db
 r = db.db_connection()
 
 
-r = db.db_connection()
-
 class Extract_details:
     @staticmethod
     def get_jobs():

@@ -49,39 +49,6 @@ header{
   align-items: center;
 }
 
-.job{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  width: 60%;
-}
-
-.job-title-section{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.job-title, .job-publish-date{
-  display: inline-flex;
-  padding-right: 20px;
-}
-
-.job-title, .job-location, .job-description, .job-publish-date{
-  margin: 0px;
-}
-
-.job-description{
-  font-family: "Stack Sans Headline Maintext", sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  white-space: pre-line;
-  padding-top: 0px;
-}
-
 .standard-button{
   background-color: var(--first-accent-colour);
   color: var(--secondary-colour);

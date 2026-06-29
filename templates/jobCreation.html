@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href = "{{ url_for('static', filename='css/jobCreation.css') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specified job</title>
+</head>
+<body>
+    <a href="/" class="home-button">Home</a>
+    <form method="post">
+        <div class = "container">
+            <div class = "sidebar">
+                <input type="text" name="title" placeholder="Title">
+                <input type="text" name="company" placeholder= "Company"> 
+                <input type="text" name="description" placeholder= "Description">
+                <input type="text" name="startDate" placeholder= "Start Date"> 
+                <input type="text" name="endDate" placeholder= "End Date">
+
+                <button type="submit">Create Job</button>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

@@ -75,6 +75,32 @@
   margin: 0px 20px 10px 3px;
 }
 
+.cv-file-upload{
+  background-color: var(--first-accent-colour);
+  color: var(--secondary-colour);
+  border-radius: 35px;
+  border: none;
+  padding: 8px;
+  width: 35%;
+  height: auto;
+  margin: 0px 20px 10px 3px;
+}
+.cv-file-upload:focus-within{
+  outline: 2px solid var(--secondary-colour);
+}
+
+.cv-input-text{
+  font-size: 18px;
+  padding: 5px;
+  margin: 0px;
+  opacity: 0.75 ;
+}
+
+.cv-input{
+  padding: 8px;
+  opacity: 0.75 ;
+  font-size: 18px;
+}
 
 .input-small:focus, .input-large:focus{
   outline: 2px solid var(--secondary-colour);

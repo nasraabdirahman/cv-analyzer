@@ -24,6 +24,11 @@ def job_post():
 def main_page():
     jobs = Extract_details.get_jobs()
     return render_template("market.html", jobs=jobs)
+
+@app.route("/fullDetailsPage")
+def apply():
+    return render_template("apply.html")
+
 if __name__ == "__main__":
     # runs in http://127.0.0.1:5000
     app.run(debug=True)

@@ -81,7 +81,7 @@
   border-radius: 35px;
   border: none;
   padding: 8px;
-  width: 35%;
+  width: 40%;
   height: auto;
   margin: 0px 20px 10px 3px;
 }
@@ -97,7 +97,7 @@
 }
 
 .cv-input{
-  padding: 8px;
+  padding: 12px;
   opacity: 0.75 ;
   font-size: 18px;
 }

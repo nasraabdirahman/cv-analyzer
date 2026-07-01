@@ -23,11 +23,24 @@ def job_post():
 @app.route("/mainPage")
 def main_page():
     jobs = Extract_details.get_jobs()
+    print(type(jobs))
+    print(jobs)
+
+    for job in jobs:
+        print(type(job), job)
+
     return render_template("market.html", jobs=jobs)
 
-@app.route("/fullDetailsPage")
-def apply():
-    return render_template("apply.html")
+#@app.route("/mainPage")
+#def main_page():
+    #jobs = Extract_details.get_jobs()
+    #print(jobs)
+    #return render_template("market.html", jobs=jobs)
+
+@app.route("/job/<job_id>")
+def apply(job_id):
+    job = Extract_details.get_job(job_id)
+    return render_template("apply.html", job=job)
 
 if __name__ == "__main__":
     # runs in http://127.0.0.1:5000

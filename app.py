@@ -23,19 +23,7 @@ def job_post():
 @app.route("/mainPage")
 def main_page():
     jobs = Extract_details.get_jobs()
-    print(type(jobs))
-    print(jobs)
-
-    for job in jobs:
-        print(type(job), job)
-
     return render_template("market.html", jobs=jobs)
-
-#@app.route("/mainPage")
-#def main_page():
-    #jobs = Extract_details.get_jobs()
-    #print(jobs)
-    #return render_template("market.html", jobs=jobs)
 
 @app.route("/job/<job_id>")
 def apply(job_id):

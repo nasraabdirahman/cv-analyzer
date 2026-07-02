@@ -21,6 +21,7 @@
         {% for job in jobs %}
 
         <a class="job-card" href="{{ url_for('apply', job_id=job['id']) }}">
+            <!-- Make it a link instead of a div and include the job_id -->
 
             <div class="job-title">
                 {{ job["title"] }}

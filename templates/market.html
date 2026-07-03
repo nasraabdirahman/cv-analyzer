@@ -16,21 +16,22 @@
                placeholder="Search Jobs...">
     </div>
 
-    <div class="jobs-list">
+    <div class="jobs-list" >
 
         {% for job in jobs %}
 
-        <div class="job-card">
+        <a class="job-card" href="{{ url_for('apply', job_id=job['id']) }}">
+            <!-- Make it a link instead of a div and include the job_id -->
 
             <div class="job-title">
-                {{ job.title }}
+                {{ job["title"] }}
             </div>
 
             <div class="job-company">
-                {{ job.company }}
+                {{ job["company"] }}
             </div>
 
-        </div>
+        </a>
 
         {% endfor %}
 

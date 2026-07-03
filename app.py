@@ -14,8 +14,8 @@ def job_post():
             request.form["company"],
             request.form["title"],
             request.form["description"],
-            request.form["startDate"],
-            request.form["endDate"]
+            request.form["releaseDate"],
+            request.form["finalDate"]
         )
         return "Job Created"
     return render_template("jobCreation.html")

@@ -20,7 +20,7 @@ def job_post():
         return "Job Created"
     return render_template("jobCreation.html")
 
-@app.route("/mainPage")
+@app.route("/market")
 def main_page():
     jobs = Extract_details.get_jobs()
     return render_template("market.html", jobs=jobs)

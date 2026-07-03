@@ -23,5 +23,5 @@ Open the app in the webbrowser with:
 
 Followed by the name of the selected page:
 `/create`
-`/homePage`
+`/market`
 `/fullDetailsPage`

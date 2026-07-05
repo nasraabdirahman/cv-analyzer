@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="../static/css/apply.css">
   <script defer src="../static/js/colourTheme.js"></script>
   <script defer src="../static/js/expandable.js"></script>
+  <script > const job = {{job | tojson}} </script>
+  <script defer src="../static/js/listingTimer.js"></script>
   <title>Full Job-Description</title>
 </head>
 <body>
@@ -66,6 +68,13 @@
         We welcome applications from enthusiastic students who are passionate about providing excellent service and contributing to the academic community.
 
       </p>
+      <div class="days-left-display-centered">
+        <div class="days-left-display">
+          <h2 class="days-left-display-text stack-sans-headline-title"> Days left until listing closes: </h2>
+          <p id="days-left" class="stack-sans-headline-title" ></p>
+        </div>
+      </div>
+
       <section class="expandable-section">
         <div class="expandable-content">
           <h3 class="text stack-sans-headline-title"> Application </h3>
@@ -86,7 +95,7 @@
           </div>
       </section>
       <div class="centered">
-        <button class="standard-button stack-sans-headline-mainText">
+        <button class="standard-button stack-sans-headline-title">
           Apply
         </button>
       </div>

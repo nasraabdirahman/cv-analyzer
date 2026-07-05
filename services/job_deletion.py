@@ -10,3 +10,7 @@ def dateToSeconds(endDate):
     #converting the date to seconds
     seconds = int((end - datetime.now()).total_seconds())
     return seconds
+
+def deleteListing(job_id):
+    r.delete(f"job:{job_id}")
+    # return 

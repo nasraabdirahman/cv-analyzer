@@ -7,7 +7,9 @@ The model used is llama3. Download llama to get access to the model.
 ## How to start the website
 Be in the working directory: [root](./).
 Dependecies:
+
 Flask: `pip install flask`
+
 Redis: `pip install redis`
 
 Open Docker 
@@ -24,4 +26,3 @@ Open the app in the webbrowser with:
 Followed by the name of the selected page:
 `/create`
 `/homePage`
-`/fullDetailsPage`

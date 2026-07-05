@@ -14,13 +14,13 @@ def job_post():
             request.form["company"],
             request.form["title"],
             request.form["description"],
-            request.form["startDate"],
-            request.form["endDate"]
+            request.form["releaseDate"],
+            request.form["removalDate"]
         )
         return "Job Created"
     return render_template("jobCreation.html")
 
-@app.route("/mainPage")
+@app.route("/market")
 def main_page():
     jobs = Extract_details.get_jobs()
     return render_template("market.html", jobs=jobs)

@@ -13,7 +13,9 @@
             <div class = "sidebar">
                 <input type="text" name="title" placeholder="Title">
                 <input type="text" name="company" placeholder= "Company"> 
-                <input type="text" name="description" placeholder= "Description">
+                <input type="text" name="location" placeholder= "Location">
+                <textarea type="text" name="shortDescription" spellcheck="true" maxlength="200" placeholder="Short Description" style="resize:none"></textarea> 
+                <textarea type="text" name="longDescription" spellcheck="true" maxlength="800" placeholder="Full Description" style="resize:none"></textarea> 
                 <p class="text">
                     Release Date
                 </p>
@@ -22,6 +24,11 @@
                     Removal Date
                 </p> 
                 <input type="date" name="removalDate" >
+                <p class="text">
+                    Start Date
+                </p> 
+                <input type="date" name="startDate" >
+
 
                 <button type="submit">Create Job</button>
             </div>

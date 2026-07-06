@@ -59,7 +59,7 @@
   border-radius: 999px;
   border: none;
   padding: 8px;
-  width: 20%;
+  width: 28%;
   height: auto;
   margin: 0px 20px 10px 3px;
 }
@@ -70,9 +70,10 @@
   border-radius: 999px;
   border: none;
   padding: 8px;
-  width: 35%;
+  width: 40%;
   height: auto;
   margin: 0px 20px 10px 3px;
+  display: flex;
 }
 .days-left-display-centered{
   display: flex;
@@ -86,10 +87,10 @@
   color: var(--secondary-colour);
   border-radius: 35px;
   border: none;
-  padding: 15px;
+  padding: 8px;
   width: 80%;
   height: auto;
-  margin: 0px;
+  margin: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;

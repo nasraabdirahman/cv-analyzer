@@ -13,9 +13,12 @@ def job_post():
         service.creating_job(
             request.form["company"],
             request.form["title"],
-            request.form["description"],
+            request.form["location"],
+            request.form["shortDescription"],
+            request.form["longDescription"],
             request.form["releaseDate"],
-            request.form["removalDate"]
+            request.form["removalDate"],
+            request.form["startDate"]
         )
         return "Job Created"
     return render_template("jobCreation.html")

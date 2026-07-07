@@ -11,6 +11,15 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 0px;
+}
+
+.job-info-section{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
 }
 
 .job-title, .job-publish-date{
@@ -18,7 +27,7 @@
   padding-right: 20px;
 }
 
-.job-title, .job-location, .job-description, .job-publish-date{
+.job-title, .job-location, .job-description, .job-publish-date, .job-company{
   margin: 0px;
 }
 

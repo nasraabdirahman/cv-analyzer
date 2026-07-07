@@ -12,7 +12,7 @@ jobs:
             - name: Check Repository
               uses: actions/checkout@v4
             - name: Start Redis 
-              run: docker compose up -d redis
+              run: docker compose -f docker/redis-docker-compose.yml up -d redis
             - name: Wait for Redis
               run: |
                 until docker exec redis redis-cli ping; do

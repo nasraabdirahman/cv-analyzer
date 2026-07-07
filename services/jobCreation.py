@@ -5,14 +5,17 @@ r = db.db_connection()
 
 class Job_creation:
     #create a job annonce
-    def creating_job(self, company, title, description, releaseDate, removalDate):
+    def creating_job(self, company, title, location, shortDescription, longDescription, releaseDate, removalDate, startDate):
         job_id = r.incr("next_job_id")
         r.hset (f"job:{job_id}", mapping={
             'company': company,
             'title': title,
-            'description': description,
+            'location': location,
+            'shortDescription': shortDescription,
+            'longDescription': longDescription,
             'releaseDate': releaseDate,
             #change name to minimize confusion
-            'removalDate': removalDate
+            'removalDate': removalDate,
+            'startDate': startDate
         })
         return job_id

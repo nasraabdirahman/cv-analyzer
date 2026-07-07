@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="../static/css/style.css">
   <link rel="stylesheet" href="../static/css/apply.css">
   <script defer src="../static/js/colourTheme.js"></script>
-  <script defer src="../static/js/expandable.js"></script>
+  <script defer src="../static/js/applyButton.js"></script>
+  <script > const job = {{job | tojson}}; </script>
+  <script defer src="../static/js/listingTimer.js"></script>
   <title>Full Job-Description</title>
 </head>
 <body>
@@ -17,80 +19,65 @@
     <h2 class="title stack-sans-headline-title "> Job Application </h2>
   </header>
   <main class="centered">
-    <!-- %%job-description%% -->
     <article class="job">
       <section class="job-title-section">
-        <h2 class="job-title stack-sans-headline-title" > %%Library Assistant (temporary)%% </h2>
-        <p class="job-publish-date" > 1/4-26 </p>
+        <h2 class="job-title stack-sans-headline-title" > {{ job["title"] }} </h2>
+        <p class="job-publish-date" > Application opened: {{ job["releaseDate"] }}</p>
       </section>
-      <h4 class="job-location stack-sans-headline-title">  %%Jönköping University%% </h4>
+      <section class="job-info-section">
+        <h4 class="job-company stack-sans-headline-title">  {{ job["company"] }} </h4>
+        <p class="job-publish-date" > Application ends: {{ job["removalDate"] }}</p>
+      </section>
+      <section class="job-info-section">
+        <h4 class="job-location stack-sans-headline-title">  {{ job["location"] }} </h4>
+        <p class="job-publish-date" > Start date: {{ job["startDate"] }}</p>
+      </section>
       <p class="job-description stack-sans-headline-mainText"> 
       Full Job Description 
-        Jönköping University is seeking motivated and service-oriented students to join the University Library as Student Library Assistants. This position offers an opportunity to gain valuable work experience while supporting students, faculty, researchers, and visitors in a modern academic library environment.
-
-        As a student employee, you will work alongside experienced library staff to ensure that the library provides excellent service, maintains organized collections, and offers a welcoming study environment. Evening and weekend shifts are included as part of the regular schedule.
-
-        Key Responsibilities
-        Provide friendly and professional assistance at the library information desk.
-        Help students and visitors locate books, journals, and other academic resources.
-        Assist with borrowing, returning, and renewing library materials using the library management system.
-        Support users with printing, scanning, photocopying, and basic IT-related questions.
-        Organize, shelve, and maintain library collections to ensure accurate placement of materials.
-        Assist with inventory projects and collection maintenance.
-        Support library events, workshops, exhibitions, and guided tours when needed.
-        Help maintain a quiet, clean, and welcoming study environment.
-        Perform general administrative tasks as assigned by library staff.
-
-        Required Skills and Qualifications
-        - Be enrolled as a full-time student, with at least one year of completed studies.
-        - Basic IT-knowledge 
-        - Ongoing studies within an area such as Librarian, information teckhnolodgy or similar.
-        - Previous experience in a customer facing profession
-        - Be proficient in both English and Swedish
-
-        Prefered Skills and Qualifications
-        - Drivers licence
-        - Experience working in a library 
-        - Experience with the library software(primo)
-
-        Working Hours
-        The position is approximately 20% of full-time employment. Student Library Assistants typically work one scheduled weekday evening and rotating weekend shifts. Additional hours may be available during examination periods, special events, or staff absences.
-
-        What We Offer
-        Flexible working hours designed to complement your studies.
-        Practical experience within an academic library setting.
-        A supportive and collaborative work environment.
-        Opportunities to develop customer service, communication, and organizational skills.
-        Valuable professional experience relevant to future careers in education, administration, information services, and public service.
-
-        We welcome applications from enthusiastic students who are passionate about providing excellent service and contributing to the academic community.
-
+        {{ job["longDescription"] }} 
       </p>
-      <section class="expandable-section">
-        <div class="expandable-content">
-          <h3 class="text stack-sans-headline-title"> Application </h3>
-          <h6 class="text stack-sans-headline-mainText"> Please include the following information </h6>
+      <div class="days-left-display-centered">
+        <div class="days-left-display">
+          <h2 class="days-left-display-text stack-sans-headline-title"> Days left until listing closes: </h2>
+          <p id="days-left" class="stack-sans-headline-title" ></p>
+        </div>
+      </div>
+      <form  method="POST" enctype="multipart/form-data">
+        <section class="expandable-section {% if errors %}expandable-section--open{% endif %}">
+          <div class="expandable-content">
+            <h3 class="text stack-sans-headline-title"> Application </h3>
+            <h6 class="text stack-sans-headline-mainText"> Please include the following information </h6>
+            {% if errors %}
+                <ul>
+                  {% for error in errors %}
+                  <p class="text stack-sans-headline-mainText">
+                    {{error}}
+                  </p>
+                  {% endfor %}
+                </ul>
+              {% endif %}
             <div class="input-container-name">
-              <input class="input-small stack-sans-headline-mainText" id="firstName" type="text" spellcheck="true" maxlength="30" placeholder="First Name"> 
-              <input class="input-small stack-sans-headline-mainText" id="lastname" type="text" spellcheck="true" maxlength="30" placeholder="Lastname">
+              <input class="input-small stack-sans-headline-mainText" name="firstName" type="text" spellcheck="true" maxlength="30" placeholder="First Name"> 
+              <input class="input-small stack-sans-headline-mainText" name="lastname" type="text" spellcheck="true" maxlength="30" placeholder="Lastname">
             </div>
-            <input class="input-large stack-sans-headline-mainText" id="personalInfo" type="text" spellcheck="true" maxlength="30" placeholder="Personal Information">
+            <input class="input-large stack-sans-headline-mainText" name="phonenumber" type="tel" spellcheck="true" maxlength="30" placeholder="Phonenumber">
+            <input class="input-large stack-sans-headline-mainText" name="email" type="email" spellcheck="true" maxlength="30" placeholder="Email">
             <div class="cv-file-upload">
               <p class="cv-input-text stack-sans-headline-mainText"> Please inculde your CV </p>
-              <input class="cv-input stack-sans-headline-mainText" id="cv" type="file" accept=".pdf, .docx">
+              <input class="cv-input stack-sans-headline-mainText" name="cv" type="file" accept=".pdf, .doc, .docx">
             </div> 
             <div class="cv-file-upload">
               <p class="cv-input-text stack-sans-headline-mainText"> Please inculde your cover letter </p>
-              <input class="cv-input stack-sans-headline-mainText" id="coverLetter" type="file" accept=".pdf, .docx">
+              <input class="cv-input stack-sans-headline-mainText" name="coverLetter" type="file" accept=".pdf, .doc, .docx">
             </div>
           </div>
-      </section>
-      <div class="centered">
-        <button class="standard-button stack-sans-headline-mainText">
-          Apply
-        </button>
-      </div>
-        
+        </section>
+        <div class="centered">
+          <button type="submit"  class="standard-button stack-sans-headline-title">
+            Apply
+          </button>
+        </div>
+      </form>  
     </article>
   </main>
   <footer>

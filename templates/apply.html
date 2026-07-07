@@ -42,7 +42,7 @@
           <p id="days-left" class="stack-sans-headline-title" ></p>
         </div>
       </div>
-      <form  method="POST">
+      <form  method="POST" enctype="multipart/form-data">
         <section class="expandable-section">
           <div class="expandable-content">
             <h3 class="text stack-sans-headline-title"> Application </h3>
@@ -55,11 +55,11 @@
             <input class="input-large stack-sans-headline-mainText" name="email" type="email" spellcheck="true" maxlength="30" placeholder="Email">
             <div class="cv-file-upload">
               <p class="cv-input-text stack-sans-headline-mainText"> Please inculde your CV </p>
-              <input class="cv-input stack-sans-headline-mainText" name="cv" type="file" accept=".pdf, .docx">
+              <input class="cv-input stack-sans-headline-mainText" name="cv" type="file" accept=".pdf, .doc, .docx">
             </div> 
             <div class="cv-file-upload">
               <p class="cv-input-text stack-sans-headline-mainText"> Please inculde your cover letter </p>
-              <input class="cv-input stack-sans-headline-mainText" name="coverLetter" type="file" accept=".pdf, .docx">
+              <input class="cv-input stack-sans-headline-mainText" name="coverLetter" type="file" accept=".pdf, .doc, .docx">
             </div>
           </div>
         </section>

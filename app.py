@@ -1,10 +1,15 @@
+import os
 from flask import Flask, Blueprint, render_template, request
 from services.jobCreation import Job_creation
 from services.extractInfo import Extract_details
 from services.application import Job_application
+from services.validation import Validation
+from werkzeug.utils import secure_filename
 
 #creates a web aplication object
 app = Flask(__name__)
+upload_folder = "uploads"
+os.makedirs(upload_folder, exist_ok=True)
 
 #shows the page
 @app.route("/create", methods=["GET", "POST"])
@@ -31,7 +36,21 @@ def main_page():
 
 @app.route("/job/<job_id>", methods=["GET", "POST"])
 def apply(job_id):
+    job = Extract_details.get_job(job_id)
     if request.method == "POST":
+        errors = Validation.validate_application(request)
+        if errors :
+            return render_template("apply.html", job=job, errors=errors)
+        
+        cv = request.files["cv"]
+        coverLetter = request.files["coverLetter"]
+
+        cv_filename =secure_filename(cv.filename)
+        coverLetter_filename =secure_filename(coverLetter.filename)
+
+        cv.save(os.path.join("uploads", cv_filename))
+        coverLetter.save(os.path.join("uploads", coverLetter_filename))
+        
         service = Job_application()
         service.creating_application(
             job_id,
@@ -39,11 +58,11 @@ def apply(job_id):
             request.form["lastname"],
             request.form["phonenumber"],
             request.form["email"],
-            request.form["cv"],
-            request.form["coverLetter"]
+            cv_filename,
+            coverLetter_filename
         )
-    print("application Created")
-    job = Extract_details.get_job(job_id)
+        return "Application Created"
+    
     return render_template("apply.html", job=job)
 
 if __name__ == "__main__":

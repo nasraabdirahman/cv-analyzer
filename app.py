@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint, render_template, request
 from services.jobCreation import Job_creation
 from services.extractInfo import Extract_details
+from services.application import Job_application
 
 #creates a web aplication object
 app = Flask(__name__)
@@ -28,8 +29,20 @@ def main_page():
     jobs = Extract_details.get_jobs()
     return render_template("market.html", jobs=jobs)
 
-@app.route("/job/<job_id>")
+@app.route("/job/<job_id>", methods=["GET", "POST"])
 def apply(job_id):
+    if request.method == "POST":
+        service = Job_application()
+        service.creating_application(
+            job_id,
+            request.form["firstName"],
+            request.form["lastname"],
+            request.form["phonenumber"],
+            request.form["email"],
+            request.form["cv"],
+            request.form["coverLetter"]
+        )
+    print("application Created")
     job = Extract_details.get_job(job_id)
     return render_template("apply.html", job=job)
 

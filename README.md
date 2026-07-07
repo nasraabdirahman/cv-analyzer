@@ -21,8 +21,11 @@ Start the app
 python app.py
 ```
 Open the app in the webbrowser with: 
+
 `http://127.0.0.1:5000`
 
 Followed by the name of the selected page:
+
 `/create`
-`/homePage`
+
+`/market`

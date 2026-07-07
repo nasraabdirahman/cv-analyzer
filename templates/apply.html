@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../static/css/style.css">
   <link rel="stylesheet" href="../static/css/apply.css">
   <script defer src="../static/js/colourTheme.js"></script>
-  <script defer src="../static/js/expandable.js"></script>
+  <script defer src="../static/js/applyButton.js"></script>
   <script > const job = {{job | tojson}}; </script>
   <script defer src="../static/js/listingTimer.js"></script>
   <title>Full Job-Description</title>
@@ -42,33 +42,33 @@
           <p id="days-left" class="stack-sans-headline-title" ></p>
         </div>
       </div>
-
-      <section class="expandable-section">
-        <div class="expandable-content">
-          <h3 class="text stack-sans-headline-title"> Application </h3>
-          <h6 class="text stack-sans-headline-mainText"> Please include the following information </h6>
+      <form  method="POST">
+        <section class="expandable-section">
+          <div class="expandable-content">
+            <h3 class="text stack-sans-headline-title"> Application </h3>
+            <h6 class="text stack-sans-headline-mainText"> Please include the following information </h6>
             <div class="input-container-name">
-              <input class="input-small stack-sans-headline-mainText" id="firstName" type="text" spellcheck="true" maxlength="30" placeholder="First Name"> 
-              <input class="input-small stack-sans-headline-mainText" id="lastname" type="text" spellcheck="true" maxlength="30" placeholder="Lastname">
+              <input class="input-small stack-sans-headline-mainText" name="firstName" type="text" spellcheck="true" maxlength="30" placeholder="First Name"> 
+              <input class="input-small stack-sans-headline-mainText" name="lastname" type="text" spellcheck="true" maxlength="30" placeholder="Lastname">
             </div>
-            <input class="input-large stack-sans-headline-mainText" id="phonenumber" type="tel" spellcheck="true" maxlength="30" placeholder="Phonenumber">
-            <input class="input-large stack-sans-headline-mainText" id="email" type="email" spellcheck="true" maxlength="30" placeholder="Email">
+            <input class="input-large stack-sans-headline-mainText" name="phonenumber" type="tel" spellcheck="true" maxlength="30" placeholder="Phonenumber">
+            <input class="input-large stack-sans-headline-mainText" name="email" type="email" spellcheck="true" maxlength="30" placeholder="Email">
             <div class="cv-file-upload">
               <p class="cv-input-text stack-sans-headline-mainText"> Please inculde your CV </p>
-              <input class="cv-input stack-sans-headline-mainText" id="cv" type="file" accept=".pdf, .docx">
+              <input class="cv-input stack-sans-headline-mainText" name="cv" type="file" accept=".pdf, .docx">
             </div> 
             <div class="cv-file-upload">
               <p class="cv-input-text stack-sans-headline-mainText"> Please inculde your cover letter </p>
-              <input class="cv-input stack-sans-headline-mainText" id="coverLetter" type="file" accept=".pdf, .docx">
+              <input class="cv-input stack-sans-headline-mainText" name="coverLetter" type="file" accept=".pdf, .docx">
             </div>
           </div>
-      </section>
-      <div class="centered">
-        <button class="standard-button stack-sans-headline-title">
-          Apply
-        </button>
-      </div>
-        
+        </section>
+        <div class="centered">
+          <button type="submit"  class="standard-button stack-sans-headline-title">
+            Apply
+          </button>
+        </div>
+      </form>  
     </article>
   </main>
   <footer>

@@ -11,6 +11,10 @@ app = Flask(__name__)
 upload_folder = "uploads"
 os.makedirs(upload_folder, exist_ok=True)
 
+@app.route("/")
+def route_index():
+    return render_template("index.html")
+
 #shows the page
 @app.route("/create", methods=["GET", "POST"])
 def job_post():

@@ -1,8 +1,6 @@
 export class Switch extends HTMLElement {
     constructor() {
         super();
-        this._action = () => { };
-        this._isOn = false;
         this.innerHTML = `
             <section class="container switch">
                 <span class="slider switch" aria-hidden="true"></span>
@@ -15,8 +13,6 @@ export class Switch extends HTMLElement {
         const thisSwitch = this.querySelector(".container.switch");
         const slider = thisSwitch.querySelector(".slider.switch");
         thisSwitch.addEventListener("click", () => {
-            this._isOn = !this._isOn; /* preserved, unused currently */
-            this._action(); /* call the custome action. use "this" for updated version */
             slider.classList.toggle("on"); /* add .css class to the element. */
         });
 

@@ -1,8 +1,40 @@
 # cv-analyzer
 Llama3 reads and comparing users cv to job description. The ai decides if the person is qualified or not.
 
-## How to get access to the Model
-The model used is llama3. Download llama to get access to the model.
+## Setting Up Ollama
+
+This project uses the **Llama 3** model through **Ollama**. The model must be installed locally before running the application.
+
+### 1. Install Ollama
+
+Download and install Ollama:
+
+https://ollama.com/download
+
+### 2. Download the model
+
+Open a terminal and run:
+
+```bash
+ollama run llama3
+```
+
+The first time you run this command, Ollama will automatically download the model. This may take several minutes depending on your internet connection.
+
+### 3. Verify Ollama is running
+
+You should receive a response from the model after entering a prompt. If you do, the installation was successful.
+
+### 4. Start the Flask application
+
+Run your Flask project as usual. The application communicates with Ollama through:
+
+```
+http://localhost:11434
+```
+
+> **Note:** Ollama must be running whenever you use the application.
+
 
 ## How to start the website
 Be in the working directory: [root](./).

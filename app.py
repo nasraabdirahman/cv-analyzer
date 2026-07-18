@@ -1,5 +1,5 @@
 import os
-from flask import Flask, Blueprint, render_template, request
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash
 from services.jobCreation import Job_creation
 from services.extractInfo import Extract_details
 from services.application import Job_application
@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 
 #creates a web aplication object
 app = Flask(__name__)
+app.secret_key = "your-secret-key"
 upload_folder = "uploads"
 os.makedirs(upload_folder, exist_ok=True)
 
@@ -30,7 +31,8 @@ def job_post():
             request.form["removalDate"],
             request.form["startDate"]
         )
-        return "Job Created"
+        flash("Job created successfully!") #flask stores the first POST request data as a message
+        return redirect(url_for("main_page")) ##why is the market called main_page?
     return render_template("jobCreation.html")
 
 @app.route("/market")

@@ -19,6 +19,8 @@
     background-color: var(--primary-bg-colour, #FFF);
     cursor: pointer;
     transition: 0.2s;
+    color: inherit;
+    text-decoration: none;
 }
 
 .container.card:hover {

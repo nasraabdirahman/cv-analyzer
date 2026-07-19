@@ -17,12 +17,12 @@ class Card extends HTMLElement {
         this._initialized = true;
 
         this.innerHTML = `
-      <a class="container card">
-        <div class="title card">EMPTY</div>
-        <div class="description card">EMPTY</div>
-        <div class="hiddenContent card">EMPTY</div>
-      </a>
-    `;
+            <div class="container card">
+                <div class="title card">EMPTY</div>
+                <div class="description card">EMPTY</div>
+                <div class="hiddenContent card">EMPTY</div>
+            </div>
+        `;
 
         // apply existing attributes after render
         this._applyAllAttributes();
@@ -60,7 +60,14 @@ class Card extends HTMLElement {
 
     set href(link) {
         const a = this.querySelector(".container.card");
-        if (a) a.setAttribute("href", link || "#");
+        if (!a) return; // is not loaded yet.
+        if (!link) return; // if link was not specified.
+        this.removeEventListener("click", this._redirect);
+        this._redirect = (e) => {
+            e.stopPropagation();
+            window.location.href = link;
+        }
+        this.addEventListener("click", this._redirect);
     }
 
     static get observedAttributes() { return ["title", "description", "hidden-content", "href"]; }

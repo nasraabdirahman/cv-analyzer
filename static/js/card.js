@@ -31,6 +31,10 @@ class Card extends HTMLElement {
         this.querySelector(".description.card").textContent = str;
     }
     set HiddenContent(str) {
+        if (str === null || str === "") {
+            this._hasHiddenContent = false;
+            return;
+        }
         this.querySelector(".hiddenContent.card").textContent = str;
         this._hasHiddenContent = true;
     }

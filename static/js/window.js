@@ -47,11 +47,13 @@ export class Window extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return ["width", "height", "min-width", "min-height", "max-width", "max-height"];
+        return ["title", "width", "height", "min-width", "min-height", "max-width", "max-height"];
     }
 
     attributeChangedCallback(namn, gammal, ny) {
         switch (namn) {
+            case "title":
+                this.title = ny;
             case "width":
                 this.width = ny;
                 break;
@@ -72,7 +74,10 @@ export class Window extends HTMLElement {
                 break;
         }
     }
-
+    set title(str) {
+        if (!this._isInitialized) return;
+        this.querySelector(".title.window").textContent = str;
+    }
     set width(str) {
         if (!this._isInitialized) return;
         this.querySelector(".container.window").style.width = str;
@@ -97,6 +102,7 @@ export class Window extends HTMLElement {
         this.querySelector(".container.window").style.maxHeight = str;
     }
     pullAttriputes() {
+        this.title = this.getAttribute("title");
         this.width = this.getAttribute("width");
         this.height = this.getAttribute("height");
         this.minWidth = this.getAttribute("min-width");

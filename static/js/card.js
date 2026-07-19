@@ -1,6 +1,7 @@
 class Card extends HTMLElement {
     constructor() {
         super();
+        this._hasHiddenContent = false;
         this.innerHTML = `
             <a class="container card">
                 <div class="title card">
@@ -18,8 +19,34 @@ class Card extends HTMLElement {
         `;
         this.addEventListener("click", (e) => {
             e.stopPropagation();
-            this.querySelector(".hiddenContent.card").classList.toggle("reveal")
+            if (this._hasHiddenContent) {
+                this.querySelector(".hiddenContent.card").classList.toggle("reveal")
+            }
         });
+    }
+    set Title(str) {
+        this.querySelector(".title.card").textContent = str;
+    }
+    set Description(str) {
+        this.querySelector(".description.card").textContent = str;
+    }
+    set HiddenContent(str) {
+        this.querySelector(".hiddenContent.card").textContent = str;
+        this._hasHiddenContent = true;
+    }
+    static get observedAttributes() { return ["title", "description", "hidden-content"]; }
+    attributeChangedCallback(name, oldValue, newValue) {
+        switch (name) {
+            case "title":
+                this.Title = newValue;
+                break;
+            case "description":
+                this.Description = newValue;
+                break;
+            case "hidden-content":
+                this.HiddenContent = newValue;
+                break;
+        }
     }
 }
 

@@ -1,0 +1,54 @@
+.jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    width: 90%;
+    margin: 30px auto;
+}
+
+.container.card {
+    user-select: none;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    border: 1px solid #4f8cff;
+    border-radius: 25px;
+    padding: 30px;
+    background-color: var(--primary-bg-colour, #FFF);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.container.card:hover {
+    user-select: none;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.title.card {
+    user-select: none;
+    font-size: 32px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
+.description.card {
+    user-select: none;
+    font-size: 22px;
+}
+
+.hiddenContent.card {
+    user-select: none;
+    max-height: 0%;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.25s ease;
+}
+
+.hiddenContent.card.reveal {
+    max-height: 100%;
+    opacity: 1;
+}

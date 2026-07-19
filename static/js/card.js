@@ -34,7 +34,12 @@ class Card extends HTMLElement {
         this.querySelector(".hiddenContent.card").textContent = str;
         this._hasHiddenContent = true;
     }
-    static get observedAttributes() { return ["title", "description", "hidden-content"]; }
+
+    set href(link) {
+        this.querySelector(".container.card").href = link;
+    }
+
+    static get observedAttributes() { return ["title", "description", "hidden-content", "href"]; }
     attributeChangedCallback(name, oldValue, newValue) {
         switch (name) {
             case "title":
@@ -45,6 +50,9 @@ class Card extends HTMLElement {
                 break;
             case "hidden-content":
                 this.HiddenContent = newValue;
+                break;
+            case "href":
+                this.href = newValue;
                 break;
         }
     }

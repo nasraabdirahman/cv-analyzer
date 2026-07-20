@@ -17,7 +17,7 @@ def test_jobCreation(mocker):
         "2025-02-01",
         "2025-03-01"
     )
-    #return id
+    #checking if r.incr(...) returns something
     assert result == 1
     #check if they are called once
     fake_redis.incr.assert_called_once_with("next_job_id")

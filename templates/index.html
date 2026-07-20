@@ -1,22 +1,42 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="/static/css/window.css">
     <link rel="stylesheet" href="/static/css/card.css">
     <link rel="stylesheet" href="/static/css/switch.css">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script type="module" src="/static/js/window.js"></script>
+    <script type="module" src="/static/js/card.js"></script>
     <script type="module" src="/static/js/index.js"></script>
     <script type="module" src="/static/js/switch.js"></script>
     <script type="module" src="/static/js/card.js"></script>
 </head>
 
-<body>
-    <our-card id="testCard"></our-card>
-    <h1>Index</h1>
-    <a href="/market">market</a>
-    <a href="/create">create</a>
-    <a href="/job/0">job/0</a>
-    <p>Do not modify this html on your own, create instead issues in the github.</p>
-    <our-switch id="colorSwitch" lefttext="Light" righttext="Dark"></our-switch>
+<body style="display: flex; flex-direction: column; align-items: center;">
+    <div>
+        <our-switch id="colorSwitch" lefttext="Light" righttext="Dark"></our-switch>
+        <h1>Index</h1>
+        <a href="/market">market</a>
+        <a href="/create">create</a>
+        <a href="/job/0">job/0</a>
+        <p>Do not modify this html on your own, create instead issues in the github.</p>
+
+        <our-window id="top5" title="Top 5 visited Job" width="720px">
+            <div class="titlebar">
+                <div>On Click: </div>
+                <our-switch lefttext="AI Analyze" righttext="To Apply"></our-switch>
+                <div>Window: </div>
+                <our-switch id="window-fold-switch" lefttext="Expand" righttext="Fold"></our-switch>
+            </div>
+            <div class="content">
+                <our-card id="testCard" title="My Title"
+                    hidden-content="Click the Card to Expand and See the Hidden Content"></our-card>
+                <our-card id="anyCard" title="Second Title" description="Second Description"></our-card>
+                <our-card id="linkCard" href="/market"></our-card>
+                <our-card></our-card>
+            </div>
+        </our-window>
+    </div>
 </body>
 
 </html>

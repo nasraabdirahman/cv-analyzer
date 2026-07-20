@@ -31,4 +31,4 @@ jobs:
                 python -m pip install --upgrade pip
                 pip install -r requirement.txt
             - name: Run tests
-              run: pytest
+              run: python -m pytest

@@ -6,3 +6,4 @@ uploads/
 
 # Node
 node_modules/
+__test*

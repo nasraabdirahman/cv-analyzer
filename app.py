@@ -84,11 +84,11 @@ def job_post():
             request.form["startDate"]
         )
         flash("Job created successfully!") #flask stores the first POST request data as a message
-        return redirect(url_for("main_page")) ##why is the market called main_page?
+        return redirect(url_for("market")) ##why is the market called main_page?
     return render_template("jobCreation.html")
 
 @app.route("/market")
-def main_page():
+def market():
     jobs = Extract_details.get_jobs()
     return render_template("market.html", jobs=jobs)
 
@@ -119,8 +119,8 @@ def apply(job_id):
             cv_filename,
             coverLetter_filename
         )
-        return "Application Created"
-    
+        flash("Application Created") 
+        return redirect(url_for("market"))
     return render_template("apply.html", job=job)
 
 if __name__ == "__main__":

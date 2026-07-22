@@ -1,3 +1,9 @@
 #_pycache_#
 *.py[cod]
+
+# User Uploads
+uploads/
+
+# Node
+node_modules/
 __test*

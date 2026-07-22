@@ -1,16 +1,8 @@
+import { getCookie } from "./cookies.js";
 const colourScheme = document.querySelector('meta[name=color-scheme]');
 const switchButtons = document.querySelectorAll('.scheme-switcher_button');
 const slider = document.querySelector('.scheme-switcher_slider');
 
-function getCookie(name) {
-  const value = `; ${document.cookie}` ;
-  const parts = value.split(`; ${name}=`) ;
-
-  if (parts.length === 2) {
-    return parts.pop().split(";").shift() ;
-  }
-  return null ;
-}
 
 const savedTheme = getCookie("theme");
 if(savedTheme) {

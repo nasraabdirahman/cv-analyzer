@@ -18,9 +18,9 @@ class Card extends HTMLElement {
 
         this.innerHTML = `
             <div class="container card">
-                <div class="title card">EMPTY</div>
-                <div class="description card">EMPTY</div>
-                <div class="hiddenContent card">EMPTY</div>
+                <div class="title card"></div>
+                <div class="description card"></div>
+                <div class="hiddenContent card"></div>
             </div>
         `;
 
@@ -33,6 +33,14 @@ class Card extends HTMLElement {
         this.Description = this.getAttribute("description");
         this.HiddenContent = this.getAttribute("hidden-content");
         this.href = this.getAttribute("href");
+    }
+
+    reveal() {
+        this.querySelector(".hiddenContent.card").classList.add("reveal");
+    }
+
+    hide() {
+        this.querySelector(".hiddenContent.card").classList.remove("reveal");
     }
 
     set Title(str) {
@@ -58,16 +66,32 @@ class Card extends HTMLElement {
         this._hasHiddenContent = true;
     }
 
+    get HiddenContent() {
+        return this.querySelector(".hiddenContent.card").textContent;
+    }
+
     set href(link) {
         const a = this.querySelector(".container.card");
         if (!a) return; // is not loaded yet.
-        if (!link) return; // if link was not specified.
         this.removeEventListener("click", this._redirect);
+        if (!link) return; // if link was not specified.
         this._redirect = (e) => {
             e.stopPropagation();
             window.location.href = link;
         }
         this.addEventListener("click", this._redirect);
+    }
+
+    set hrefOpen(link) {
+        const a = this.querySelector(".container.card");
+        if (!a) return; // is not loaded yet.
+        this.removeEventListener("click", this._open);
+        if (!link) return; // if link was not specified.
+        this._open = (e) => {
+            e.stopPropagation();
+            window.open(link);
+        }
+        this.addEventListener("click", this._open);
     }
 
     static get observedAttributes() { return ["title", "description", "hidden-content", "href"]; }

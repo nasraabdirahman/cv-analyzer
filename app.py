@@ -1,5 +1,7 @@
 import os
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash
+from database.redisClient import db
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash, jsonify
+from ollama import generate
 from services.jobCreation import Job_creation
 from services.extractInfo import Extract_details
 from services.application import Job_application
@@ -9,12 +11,62 @@ from werkzeug.utils import secure_filename
 #creates a web aplication object
 app = Flask(__name__)
 app.secret_key = "your-secret-key"
+r = db.db_connection()
 upload_folder = "uploads"
 os.makedirs(upload_folder, exist_ok=True)
 
 @app.route("/")
 def route_index():
     return render_template("index.html")
+
+@app.route("/api/get-jobs")
+def api_newJobs():
+    # 📌 if multiple keys.
+    jobID = request.args.getlist("id", type=int)
+    if jobID != None:
+        jobs = []
+        for _id in jobID:
+            job = r.hgetall(f"job:{_id}")
+            job["job"] = _id
+            jobs.append(job)
+        return jsonify(jobs)
+
+    # 📌 if requesting a sorted list.
+    limit = request.args.get("limit", default=5, type=int)
+    key = request.args.get("list-key", type=str) 
+    if key != None:
+        list_jobID = r.zrevrange(key, 0, limit - 1)
+        jobs = []
+        for _id in list_jobID:
+            job = r.hgetall(f"job:{_id}")
+            job["job"] = key
+            jobs.append(job)
+        return jsonify(jobs)
+    
+    arg = request.query_string.decode("utf-8")
+    if arg == "":
+        return jsonify([]) 
+    return jsonify({"title":"Invalid Request", "shortDescription":f"request.args: \"{arg}\""})
+
+@app.route("/api/ai-analyze")
+def api_ai_analyze():
+    desc = request.args.get("self-description", type=str)
+    if desc == "":
+        return jsonify({"response":"Fill your self description to get analyzes form our AI ;)"})
+    
+    jobID = request.args.get("id", type=int)
+    job = r.hgetall(f"job:{jobID}")
+    jobShortDesc = job.get("shortDescription")
+    jobLongDesc = job.get("longDescription")
+    if jobShortDesc == None or jobLongDesc == None:
+        return jsonify({"response": "The job has no description"})
+
+    jobDesc = "<The job description starts here>" + jobShortDesc + jobLongDesc + "<The job description ends here>"
+    restriction = "Be concise and direct. Do not include acknowledgements, pleasantries, or filler. Start with the answer immediately. Analyze if the user is capable of this job based on the user prompt. "
+
+    res = generate(model='llama3', prompt=desc, system = restriction + jobDesc)
+    return jsonify({"response": res.get("response")})
+
 
 #shows the page
 @app.route("/create", methods=["GET", "POST"])

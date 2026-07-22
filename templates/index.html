@@ -21,19 +21,46 @@
         <a href="/job/0">job/0</a>
         <p>Do not modify this html on your own, create instead issues in the github.</p>
 
-        <our-window id="top5" title="Top 5 visited Job" width="720px">
+        <our-window title="Self-Description" width="720px" height="100px">
             <div class="titlebar">
-                <div>On Click: </div>
-                <our-switch lefttext="AI Analyze" righttext="To Apply"></our-switch>
-                <div>Window: </div>
-                <our-switch id="window-fold-switch" lefttext="Expand" righttext="Fold"></our-switch>
+                <p>The AI will use this to analyze the compability between you and the job position.</p>
             </div>
             <div class="content">
-                <our-card id="testCard" title="My Title"
-                    hidden-content="Click the Card to Expand and See the Hidden Content"></our-card>
-                <our-card id="anyCard" title="Second Title" description="Second Description"></our-card>
-                <our-card id="linkCard" href="/market"></our-card>
-                <our-card></our-card>
+                <textarea id="self-description" placeholder="Tell us about yourself..."
+                    style="resize: none; box-sizing: border-box; width:100%;height:100%;background-color: transparent;color:var(--secondary-colour, #FFF)"></textarea>
+            </div>
+        </our-window>
+
+        <our-window id="top-new" title="New Jobs" width="720px">
+            <div class="titlebar">
+                <div>On Click: </div>
+                <our-switch id="ai-switch-1" class="ai-switch" lefttext="AI Analyze" righttext="To Apply"></our-switch>
+                <div>Window: </div>
+                <our-switch id="fold-switch-1" class="fold-switch" lefttext="Expand" righttext="Fold"></our-switch>
+            </div>
+            <div class="content">
+            </div>
+        </our-window>
+
+        <our-window id="top-popular" title="Top 5 Visited Job" width="720px">
+            <div class="titlebar">
+                <div>On Click: </div>
+                <our-switch id="ai-switch-2" class="ai-switch" lefttext="AI Analyze" righttext="To Apply"></our-switch>
+                <div>Window: </div>
+                <our-switch id="fold-switch-2" class="fold-switch" lefttext="Expand" righttext="Fold"></our-switch>
+            </div>
+            <div class="content">
+            </div>
+        </our-window>
+
+        <our-window id="top-recent" title="History" width="720px">
+            <div class="titlebar">
+                <div>On Click: </div>
+                <our-switch id="ai-switch-3" class="ai-switch" lefttext="AI Analyze" righttext="To Apply"></our-switch>
+                <div>Window: </div>
+                <our-switch id="fold-switch-3" class="fold-switch" lefttext="Expand" righttext="Fold"></our-switch>
+            </div>
+            <div class="content">
             </div>
         </our-window>
     </div>

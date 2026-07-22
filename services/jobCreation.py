@@ -17,7 +17,8 @@ class Job_creation:
             #unix for this
             'releaseDate': releaseDate,
             'removalDate': removalDate,
-            'startDate': startDate
+            'startDate': startDate,
+            'applyCounter': 0
         })
         #get the current unix_timestamp
         unix_timestamp = int(time.time())

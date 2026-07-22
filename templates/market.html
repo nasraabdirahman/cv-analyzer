@@ -6,9 +6,13 @@
     <title>Market</title>
 
     <link rel="stylesheet"
-      href="{{ url_for('static', filename='css/market.css') }}">
+          href="{{ url_for('static', filename='css/market.css') }}">
 </head>
+
 <body>
+
+    <a href="/" class="home-button">Home</a>
+
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
@@ -18,33 +22,49 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <div class="search-container">
-        <input type="text"
-               class="search-bar"
-               placeholder="Search Jobs...">
-    </div>
 
-    <div class="jobs-list" >
+    <div class="container">
 
-        {% for job in jobs %}
+        <div class="sidebar">
 
-        <a class="job-card" href="{{ url_for('apply', job_id=job['id']) }}">
-            <!-- Make it a link instead of a div and include the job_id -->
+            <input
+                type="text"
+                class="search-bar"
+                placeholder="Search Jobs..."
+            >
 
-            <div class="job-title">
-                {{ job["title"] }}
+            <div class="jobs-list">
+
+                {% for job in jobs %}
+
+                <a class="job-card"
+                   href="{{ url_for('apply', job_id=job['id']) }}">
+
+                    <div class="job-title">
+                        {{ job["title"] }}
+                    </div>
+
+                    <div class="job-company">
+                        {{ job["company"] }}
+                    </div>
+
+                    <div class="job-location">
+                        {{ job["location"] }}
+                    </div>
+
+                    <div class="job-description">
+                        {{ job["shortDescription"] }}
+                    </div>
+
+                </a>
+
+                {% endfor %}
+
             </div>
 
-            <div class="job-company">
-                {{ job["company"] }}
-            </div>
-
-        </a>
-
-        {% endfor %}
+        </div>
 
     </div>
 
 </body>
-
 </html>

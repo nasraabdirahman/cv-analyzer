@@ -1,4 +1,5 @@
 from database.redisClient import db
+import time
 
 r = db.db_connection()
 
@@ -13,9 +14,13 @@ class Job_creation:
             'location': location,
             'shortDescription': shortDescription,
             'longDescription': longDescription,
+            #unix for this
             'releaseDate': releaseDate,
-            #change name to minimize confusion
             'removalDate': removalDate,
             'startDate': startDate
         })
+        #get the current unix_timestamp
+        unix_timestamp = int(time.time())
+        # do a list of jobs. sorted by latest date. only the number
+        r.zadd("jobs:by-create-date", {job_id: unix_timestamp})
         return job_id

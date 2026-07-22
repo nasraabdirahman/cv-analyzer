@@ -1,6 +1,13 @@
 export class Switch extends HTMLElement {
     constructor() {
         super();
+        this._isInitialized = false;
+    }
+
+    connectedCallback() {
+        if (this._isInitialized) return;
+        this._isInitialized = true;
+
         this.innerHTML = `
             <section class="container switch">
                 <span class="slider switch" aria-hidden="true"></span>
@@ -13,12 +20,19 @@ export class Switch extends HTMLElement {
         const container = this.querySelector(".container.switch");
         const slider = container.querySelector(".slider.switch");
         container.addEventListener("click", () => {
+            // bubbling is enabled. ;) 
+            // trigger user custom script because of it.
             this.isOn = !this.isOn;
-            slider.classList.toggle("on"); /* add .css class to the element. */
+            if (this.isOn) {
+                slider.classList.add("on");
+            }
+            else {
+                slider.classList.remove("on");
+            }
         });
 
-        container.querySelector(".text.left.switch").textContent = "Off";
-        container.querySelector(".text.right.switch").textContent = "On";
+        container.querySelector(".text.left.switch").textContent = this.getAttribute("lefttext", "Off");
+        container.querySelector(".text.right.switch").textContent = this.getAttribute("righttext", "On");
 
 
         if (typeof document !== "undefined") {
@@ -36,11 +50,27 @@ export class Switch extends HTMLElement {
                 this._isOn = false;
             }
         }
-        if (this._isOn) {
-            this._isOn = !this._isOn;
-            /* toggle .css class to the element. */
-            /* also bubble up to the parent, aka this class */
-            container.click();
+
+        // ensure the custom script is run at the start.
+        this.reFire();
+    }
+
+    reFire() {
+        // mimic the user to trigger the custom event.
+        // if the switch is attacked to a DOM,
+        // then we have to run this
+        this._isOn = !this._isOn;
+        this.querySelector(".container.switch").click();
+    }
+
+    set lefttext(str) {
+        if (this._isInitialized) {
+            this.querySelector(".text.left.switch").textContent = str;
+        }
+    }
+    set righttext(str) {
+        if (this._isInitialized) {
+            this.querySelector(".text.right.switch").textContent = str;
         }
     }
     set isOn(isTrue) {
@@ -57,11 +87,11 @@ export class Switch extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue) {
         switch (name) {
             case "lefttext":
-                this.querySelector(".text.left.switch").textContent = newValue;
+                this.lefttext = newValue;
 
                 break;
             case "righttext":
-                this.querySelector(".text.right.switch").textContent = newValue;
+                this.righttext = newValue;
                 break;
         }
     }

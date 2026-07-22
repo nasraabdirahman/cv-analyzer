@@ -1,22 +1,69 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="/static/css/window.css">
     <link rel="stylesheet" href="/static/css/card.css">
     <link rel="stylesheet" href="/static/css/switch.css">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script type="module" src="/static/js/window.js"></script>
+    <script type="module" src="/static/js/card.js"></script>
     <script type="module" src="/static/js/index.js"></script>
     <script type="module" src="/static/js/switch.js"></script>
     <script type="module" src="/static/js/card.js"></script>
 </head>
 
-<body>
-    <our-card id="testCard"></our-card>
-    <h1>Index</h1>
-    <a href="/market">market</a>
-    <a href="/create">create</a>
-    <a href="/job/0">job/0</a>
-    <p>Do not modify this html on your own, create instead issues in the github.</p>
-    <our-switch id="colorSwitch" lefttext="Light" righttext="Dark"></our-switch>
+<body style="display: flex; flex-direction: column; align-items: center;">
+    <div>
+        <our-switch id="colorSwitch" lefttext="Light" righttext="Dark"></our-switch>
+        <h1>Index</h1>
+        <a href="/market">market</a>
+        <a href="/create">create</a>
+        <a href="/job/0">job/0</a>
+        <p>Do not modify this html on your own, create instead issues in the github.</p>
+
+        <our-window title="Self-Description" width="720px" height="100px">
+            <div class="titlebar">
+                <p>The AI will use this to analyze the compability between you and the job position.</p>
+            </div>
+            <div class="content">
+                <textarea id="self-description" placeholder="Tell us about yourself..."
+                    style="resize: none; box-sizing: border-box; width:100%;height:100%;background-color: transparent;color:var(--secondary-colour, #FFF)"></textarea>
+            </div>
+        </our-window>
+
+        <our-window id="top-new" title="New Jobs" width="720px">
+            <div class="titlebar">
+                <div>On Click: </div>
+                <our-switch id="ai-switch-1" class="ai-switch" lefttext="AI Analyze" righttext="To Apply"></our-switch>
+                <div>Window: </div>
+                <our-switch id="fold-switch-1" class="fold-switch" lefttext="Expand" righttext="Fold"></our-switch>
+            </div>
+            <div class="content">
+            </div>
+        </our-window>
+
+        <our-window id="top-popular" title="Top 5 Visited Job" width="720px">
+            <div class="titlebar">
+                <div>On Click: </div>
+                <our-switch id="ai-switch-2" class="ai-switch" lefttext="AI Analyze" righttext="To Apply"></our-switch>
+                <div>Window: </div>
+                <our-switch id="fold-switch-2" class="fold-switch" lefttext="Expand" righttext="Fold"></our-switch>
+            </div>
+            <div class="content">
+            </div>
+        </our-window>
+
+        <our-window id="top-recent" title="History" width="720px">
+            <div class="titlebar">
+                <div>On Click: </div>
+                <our-switch id="ai-switch-3" class="ai-switch" lefttext="AI Analyze" righttext="To Apply"></our-switch>
+                <div>Window: </div>
+                <our-switch id="fold-switch-3" class="fold-switch" lefttext="Expand" righttext="Fold"></our-switch>
+            </div>
+            <div class="content">
+            </div>
+        </our-window>
+    </div>
 </body>
 
 </html>

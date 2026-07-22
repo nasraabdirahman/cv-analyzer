@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../static/css/style.css">
   <link rel="stylesheet" href="../static/css/apply.css">
-  <script defer src="../static/js/colourTheme.js"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/colourTheme.js')}}"></script>
   <script defer src="../static/js/applyButton.js"></script>
   <script > const job = {{job | tojson}}; </script>
   <script defer type="module" src="../static/js/listingTimer.js"></script>

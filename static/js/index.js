@@ -116,7 +116,7 @@ async function initialize_tops(selector, href) {
             }
         }
     });
-    const response = await fetch("/api/get-jobs?id=4");
+    const response = await fetch(href);
     const data = await response.json();
     const jobs = Array.isArray(data) ? data : [data]; // would be problem if return only one job.
     if (jobs.length === 0) {

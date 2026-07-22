@@ -84,7 +84,7 @@ def job_post():
             request.form["startDate"]
         )
         flash("Job created successfully!") #flask stores the first POST request data as a message
-        return redirect(url_for("main_page")) ##why is the market called main_page?
+        return redirect(url_for("market")) ##why is the market called main_page?
     return render_template("jobCreation.html")
 
 @app.route("/market")

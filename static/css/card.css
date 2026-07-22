@@ -13,7 +13,7 @@
     width: 100%;
     box-sizing: border-box;
     position: relative;
-    border: 1px solid #4f8cff;
+    border: 1px solid var(--secondary-colour, #FFF);
     border-radius: 25px;
     padding: 30px;
     background-color: var(--primary-bg-colour, #FFF);

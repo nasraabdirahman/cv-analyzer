@@ -1,5 +1,5 @@
 import os
-from flask import Flask, Blueprint, render_template, request
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash
 from services.jobCreation import Job_creation
 from services.extractInfo import Extract_details
 from services.application import Job_application
@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 
 #creates a web aplication object
 app = Flask(__name__)
+app.secret_key= "your-secret-key"
 upload_folder = "uploads"
 os.makedirs(upload_folder, exist_ok=True)
 
@@ -30,7 +31,7 @@ def job_post():
     return render_template("jobCreation.html")
 
 @app.route("/market")
-def main_page():
+def market():
     jobs = Extract_details.get_jobs()
     return render_template("market.html", jobs=jobs)
 
@@ -61,8 +62,8 @@ def apply(job_id):
             cv_filename,
             coverLetter_filename
         )
-        return "Application Created"
-    
+        flash("Application Created") 
+        return redirect(url_for("market"))
     return render_template("apply.html", job=job)
 
 if __name__ == "__main__":

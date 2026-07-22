@@ -46,15 +46,15 @@
     color: var(--secondary-colour, #000);
     box-sizing: border-box;
     background: transparent;
-    transition: max-height 0.3s ease, opacity 0.25s ease;
+    transition: max-height 0.6s ease;
+    max-height: 100%;
     opacity: 1;
 }
 
-.main.fold.window {
+.main.window.fold {
     pointer-events: none;
     user-select: none;
-    max-height: 0%;
-    opacity: 0;
+    max-height: 0;
 }
 
 .content.window {

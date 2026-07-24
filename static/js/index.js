@@ -4,13 +4,10 @@ const MAX_JOBS = 5;
 // the switch for the color theme.
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
-document.querySelector("#colorSwitch").addEventListener("click", (e) => {
-    // Bubbling stops here.
-    e.stopPropagation();
 
-    // switch logic.
-    document.documentElement.dataset.theme = e.currentTarget.isOn ? "dark" : "light";
-});
+document.querySelector("#colorSwitch").onToggle = (isOn) => {
+    document.documentElement.dataset.theme = isOn ? "dark" : "light";
+};
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 // self-desc.
@@ -46,23 +43,32 @@ initialize_self_description();
 /////////////////////////////////////////////////////
 async function initialize_tops(selector, href) {
     const window = document.querySelector(selector);
-    window.querySelector(".fold-switch").addEventListener("click", (e) => {
-        // Bubbling stops here.
-        e.stopPropagation();
+    const response = await fetch(href);
+    const data = await response.json();
+    const jobs = Array.isArray(data) ? data : [data]; // would be problem if return only one job.
+    if (jobs.length === 0) {
+        jobs.push({ title: "Empty in the database ;(", shortDescription: "" });
+    }
+    for (const job of jobs) {
+        const card = document.createElement("our-card");
+        card.classList.add("job-card");
+        card.job = job.job;
+        card.setAttribute("title", job.title);
+        card.setAttribute("description", job.company);
+        window.addContent(card);
+    }
 
+    window.querySelector(".fold-switch").onToggle = (isOn) => {
         // fold logic.
-        if (e.currentTarget.isOn) {
+        if (isOn) {
             window.fold();
         }
         else {
             window.expand();
         }
-    });
+    };
     const clickHandlers = new Map();
-    window.querySelector(".ai-switch").addEventListener("click", (e) => {
-        // Bubbling stops here.
-        e.stopPropagation();
-
+    window.querySelector(".ai-switch").onToggle = (isOn) => {
         // lambdas.
         async function prompt(card) {
             card.reveal();
@@ -94,7 +100,7 @@ async function initialize_tops(selector, href) {
 
         // ai logic.
         const cards = window.querySelectorAll(".job-card");
-        if (e.currentTarget.isOn) {
+        if (isOn) {
             // apply-mode 
             for (const card of cards) {
                 const handler = clickHandlers.get(card);
@@ -115,22 +121,7 @@ async function initialize_tops(selector, href) {
                 card.hrefOpen = ""; // disable href.
             }
         }
-    });
-    const response = await fetch(href);
-    const data = await response.json();
-    const jobs = Array.isArray(data) ? data : [data]; // would be problem if return only one job.
-    if (jobs.length === 0) {
-        jobs.push({ title: "Empty in the database ;(", shortDescription: "" });
-    }
-    for (const job of jobs) {
-        const card = document.createElement("our-card");
-        card.classList.add("job-card");
-        card.job = job.job;
-        card.setAttribute("title", job.title);
-        card.setAttribute("description", job.company);
-        window.addContent(card);
-    }
-    window.querySelector(".ai-switch").reFire();
+    };
 }
 
 await initialize_tops("#top-new", "/api/get-jobs?limit=5&list-key=jobs:by-create-date");

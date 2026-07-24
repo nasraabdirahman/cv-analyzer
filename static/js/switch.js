@@ -50,6 +50,9 @@ export class Switch extends HTMLElement {
                 this.isOn = false;
             }
         }
+        if (typeof this.onInit === "function") {
+            this.onInit();
+        }
         this.apply();
     }
     apply() {

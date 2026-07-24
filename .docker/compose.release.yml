@@ -1,0 +1,24 @@
+name: cv-analyzer
+services:
+  web:
+    image: web
+    build:
+      context: ../
+      dockerfile: docker/dockerfile.web
+    container_name: web
+    restart: always
+    ports:
+      - "443:443"
+      - "80:80"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:8.8.0
+    container_name: redis
+    restart: always
+    volumes:
+      - redis:/data
+
+volumes:
+  redis:

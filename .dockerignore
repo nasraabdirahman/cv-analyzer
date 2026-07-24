@@ -1,0 +1,20 @@
+.docker/
+.dockerignore
+.github/
+.gitignore
+tests/
+LICENSE
+README.md
+__pycache__/
+
+
+
+#_pycache_#
+*.py[cod]
+
+# User Uploads
+uploads/
+
+# Node
+node_modules/
+__test*

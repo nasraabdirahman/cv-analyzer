@@ -1,0 +1,39 @@
+name: cv-analyzer
+services:
+  web:
+    image: web.develop
+    build:
+      context: ../
+      dockerfile: docker/dockerfile.web.develop
+    container_name: web
+    restart: always
+    ports:
+      - "5000:5000"
+      - "443:443"
+      - "80:80"
+    depends_on:
+      - redis
+    volumes:
+      - ../:/app:ro
+
+  redis:
+    image: redis:8.8.0
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis:/data
+
+  redis-insight:
+    image: redis/redisinsight:latest
+    container_name: redis-insight
+    restart: always
+    ports:
+      - "5540:5540"
+    volumes:
+      - redis-insight:/db
+
+volumes:
+  redis:
+  redis-insight:

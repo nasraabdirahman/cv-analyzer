@@ -6,6 +6,6 @@ COPY . .
 
 RUN pip install -r requirement.txt
 
-EXPOSE 5000 80 443
+EXPOSE 80 443
 
 CMD [ "python", "app.py" ]

@@ -2,6 +2,7 @@ export class Switch extends HTMLElement {
     constructor() {
         super();
         this._isInitialized = false;
+        this._onToggle = (bool) => { };
     }
 
     connectedCallback() {
@@ -17,18 +18,17 @@ export class Switch extends HTMLElement {
             </section>
         `;
 
+        this.addEventListener("click", (e) => {
+            e.stopPropagation();
+            this.onToggle(this.isOn);
+        });
+
         const container = this.querySelector(".container.switch");
-        const slider = container.querySelector(".slider.switch");
+        this._slider = container.querySelector(".slider.switch");
         container.addEventListener("click", () => {
             // bubbling is enabled. ;) 
             // trigger user custom script because of it.
             this.isOn = !this.isOn;
-            if (this.isOn) {
-                slider.classList.add("on");
-            }
-            else {
-                slider.classList.remove("on");
-            }
         });
 
         container.querySelector(".text.left.switch").textContent = this.getAttribute("lefttext", "Off");
@@ -36,33 +36,30 @@ export class Switch extends HTMLElement {
 
 
         if (typeof document !== "undefined") {
-            const key = `${this.id}_isOn=`;
+            const key = `${this.id}.isOn=`;
             const part = document.cookie
                 .split("; ")
                 .find(row => row.startsWith(key));
 
             if (part) {
                 const value = part.slice(key.length);
-                this._isOn = (value === "true");
+                this.isOn = (value === "true");
             }
             else {
                 /* default value */
-                this._isOn = false;
+                this.isOn = false;
             }
         }
 
-        // ensure the custom script is run at the start.
-        this.reFire();
     }
-
-    reFire() {
-        // mimic the user to trigger the custom event.
-        // if the switch is attacked to a DOM,
-        // then we have to run this
-        this._isOn = !this._isOn;
-        this.querySelector(".container.switch").click();
+    set onToggle(f) {
+        // run the custom script to sync it with the switch.
+        f(this.isOn);
+        this._onToggle = f;
     }
-
+    get onToggle() {
+        return this._onToggle;
+    }
     set lefttext(str) {
         if (this._isInitialized) {
             this.querySelector(".text.left.switch").textContent = str;
@@ -76,7 +73,15 @@ export class Switch extends HTMLElement {
     set isOn(isTrue) {
         this._isOn = isTrue;
         if (typeof document !== "undefined") {
-            document.cookie = `${this.id}_isOn=${this.isOn}; path=/; max-age=3600`;
+            document.cookie = `${this.id}.isOn=${this.isOn}; path=/; max-age=3600`;
+        }
+
+        // animation.
+        if (this.isOn) {
+            this._slider.classList.add("on");
+        }
+        else {
+            this._slider.classList.remove("on");
         }
     }
     get isOn() {

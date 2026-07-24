@@ -5,7 +5,7 @@ services:
     build:
       context: ../
       dockerfile: docker/dockerfile.web.develop
-    container_name: web
+    container_name: web.develop
     restart: always
     ports:
       - "5000:5000"

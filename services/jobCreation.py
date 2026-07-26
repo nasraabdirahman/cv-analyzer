@@ -1,13 +1,15 @@
 from database.redisClient import db
 import time
+from datetime import datetime
 
 r = db.db_connection()
 
 
-class Job_creation:
+class Job:
     #create a job annonce
     def creating_job(self, company, title, location, shortDescription, longDescription, releaseDate, removalDate, startDate):
         job_id = r.incr("next_job_id")
+        removal_timestamp = int(datetime.strptime(removalDate, "%Y-%m-%d").timestamp())
         r.hset (f"job:{job_id}", mapping={
             'company': company,
             'title': title,
@@ -24,4 +26,6 @@ class Job_creation:
         unix_timestamp = int(time.time())
         # do a list of jobs. sorted by latest date. only the number
         r.zadd("jobs:by-create-date", {job_id: unix_timestamp})
+        #redis deletes it whenever date is reached
+        r.expireat(f"job:{job_id}", removal_timestamp)
         return job_id

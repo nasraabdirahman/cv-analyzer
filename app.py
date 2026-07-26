@@ -2,7 +2,7 @@ import os
 from database.redisClient import db
 from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from ollama import generate
-from services.jobCreation import Job_creation
+from services.jobCreation import Job
 from services.extractInfo import Extract_details
 from services.application import Job_application
 from services.validation import Validation
@@ -72,7 +72,7 @@ def api_ai_analyze():
 @app.route("/create", methods=["GET", "POST"])
 def job_post():
     if request.method == "POST":
-        service = Job_creation()
+        service = Job()
         service.creating_job(
             request.form["company"],
             request.form["title"],

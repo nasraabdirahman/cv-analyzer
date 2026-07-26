@@ -4,9 +4,16 @@ const MAX_JOBS = 5;
 // the switch for the color theme.
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
-
+import { getCookie } from "./cookies.js";
+document.querySelector("#colorSwitch").onInit = () => {
+    const colorSwitch = document.querySelector("#colorSwitch");
+    const cookie = getCookie("theme");
+    colorSwitch.isOn = cookie == "dark" ? true : false;
+}
 document.querySelector("#colorSwitch").onToggle = (isOn) => {
-    document.documentElement.dataset.theme = isOn ? "dark" : "light";
+    const theme = isOn ? "dark" : "light";
+    document.documentElement.dataset.theme = theme;
+    document.cookie = `theme=${theme}; path=/; `;
 };
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////

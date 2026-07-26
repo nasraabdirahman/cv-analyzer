@@ -1,4 +1,4 @@
-from services.jobCreation import Job_creation
+from services.jobCreation import Job
 
 
 def test_jobCreation(mocker): 
@@ -6,7 +6,7 @@ def test_jobCreation(mocker):
     fake_redis.incr.return_value = 1
     #variable r on "jobCreation.py" is replaced by my fake redis
     mocker.patch('services.jobCreation.r', fake_redis)
-    service = Job_creation()
+    service = Job()
     result = service.creating_job(
         "Google",
         "Developer",
@@ -22,3 +22,5 @@ def test_jobCreation(mocker):
     #check if they are called once
     fake_redis.incr.assert_called_once_with("next_job_id")
     fake_redis.hset.assert_called_once()
+    fake_redis.zadd.assert_called_once()
+    fake_redis.expireat.assert_called_once()

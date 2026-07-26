@@ -2,7 +2,7 @@ import os
 from database.redisClient import db
 from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from ollama import generate
-from services.jobCreation import Job
+from services.job import Job
 from services.extractInfo import Extract_details
 from services.application import Job_application
 from services.validation import Validation

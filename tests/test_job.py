@@ -1,11 +1,11 @@
-from services.jobCreation import Job
+from services.job import Job
 
 
-def test_jobCreation(mocker): 
+def test_job(mocker): 
     fake_redis = mocker.Mock()
     fake_redis.incr.return_value = 1
-    #variable r on "jobCreation.py" is replaced by my fake redis
-    mocker.patch('services.jobCreation.r', fake_redis)
+    #variable r on "job.py" is replaced by my fake redis
+    mocker.patch('services.job.r', fake_redis)
     service = Job()
     result = service.creating_job(
         "Google",

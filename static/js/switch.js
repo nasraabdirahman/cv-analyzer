@@ -50,7 +50,20 @@ export class Switch extends HTMLElement {
                 this.isOn = false;
             }
         }
-
+        if (typeof this.onInit === "function") {
+            this.onInit();
+        }
+        this.apply();
+    }
+    apply() {
+        this.onToggle(this.isOn);
+    }
+    set onInit(f) {
+        if (this._isInitialized) f();
+        else this._onInit = f;
+    }
+    get onInit() {
+        return this._onInit;
     }
     set onToggle(f) {
         // run the custom script to sync it with the switch.

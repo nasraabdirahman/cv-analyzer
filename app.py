@@ -119,7 +119,11 @@ def apply(job_id):
             cv_filename,
             coverLetter_filename
         )
+        r.hincrby(f"job:{job_id}", "applyCounter", 1)  # fixes incrementation
+        job = r.hgetall(f"job:{job_id}")               # prints incremented value (feel free to delete this row and the one after)
+        print(job["applyCounter"])                     
         flash("Application Created") 
+        
         return redirect(url_for("market"))
     return render_template("apply.html", job=job)
 

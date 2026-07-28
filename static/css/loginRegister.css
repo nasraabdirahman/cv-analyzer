@@ -13,7 +13,7 @@ body{
 	max-width: 100% ;
 	min-height: 70%; 
 	border-radius: 40px;
-	border: 2px solid var(--first-accent-colour) ;
+	border: 2px solid var(--secondary-colour) ;
 	background-color: var(--primary-bg-colour);
 }
 .p {
@@ -22,7 +22,7 @@ body{
 	padding: 5px;
 }
 .h2{
-	font-size: 30px;
+	font-size: 36px;
 	margin: 0px;
 	padding: 10px;
 }
@@ -101,9 +101,9 @@ body{
 }
 
 .toggle{
-	background-color: var(--second-accent-colour);
+	background-color: var(--first-accent-colour);
 	height: 100%;
-	color: var(--first-accent-colour);
+	color: var(--secondary-colour);
 	position: relative;
 	left: -100%;
 	width: 200%;

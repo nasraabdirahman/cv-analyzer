@@ -21,11 +21,11 @@
 }
 
 html[data-theme="dark"] {
-  --primary-bg-colour: #02122F;
+ --primary-bg-colour: #02122F;
   --secondary-colour: #E8ECEF;
 
   --first-accent-colour: #8BA3C5;
-  --second-accent-colour: #495B7D;
+  --second-accent-colour: #455b84;
   --third-accent-colour: #405974;
 }
 
@@ -58,6 +58,7 @@ header{
   width: 15% ;
   padding: 18px 0px ;
   margin: 15px;
+  cursor: pointer;
 }
 
 .standard-button:hover{

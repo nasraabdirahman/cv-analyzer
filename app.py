@@ -123,6 +123,10 @@ def apply(job_id):
         return redirect(url_for("market"))
     return render_template("apply.html", job=job)
 
+@app.route("/loginRegister", methods=["GET", "POST"])
+def loginRegister():
+    return render_template("loginRegister.html")
+
 if __name__ == "__main__":
     # runs in http://127.0.0.1:5000
     app.run(host="0.0.0.0", debug=True)

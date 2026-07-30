@@ -26,6 +26,25 @@ body{
 	margin: 0px;
 	padding: 10px;
 }
+.container input{
+	border: 1px solid var(--secondary-colour) ;
+	border-radius: 15px;
+	background-color: var(--third-accent-colour);
+	height: 6%;
+	width: 50%;
+	margin: 5px;
+}
+
+.container input:focus{
+	outline: none;
+	border: 2px solid var(--secondary-colour) ;
+}
+
+.container input::placeholder{
+	opacity: 1;
+	color: var(--secondary-colour);
+	font-size: 16px;
+}
 
 .container form{
 	display: flex;
@@ -109,6 +128,11 @@ body{
 	width: 200%;
 	transform: translateX(0);
 	transition: all 0.6s ease-in-out;
+}
+
+.toggle button:hover{
+	border: 2px solid var(--secondary-colour) ;
+	margin: 13px;
 }
 
 .container.active .toggle{

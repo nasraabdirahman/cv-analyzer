@@ -141,10 +141,10 @@ def login():
     request.form["username"],
     request.form["password"],
   )
-  if loginStatus != "Successfull login":
+  if loginStatus != "Successful login":
     flash(loginStatus)
-  
-  return render_template("jobCreation.html")
+    return render_template("loginSignup.html")
+  return redirect(url_for("job_post"))
 
 @app.route("/signup", methods=["POST"])
 def signup():

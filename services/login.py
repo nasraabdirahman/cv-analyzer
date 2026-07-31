@@ -4,15 +4,15 @@ r = db.db_connection()
 
 class LoginMethods :
   def find_user(self, username):
-    for key in r.scan_iter("user:*"):
+    for key in r.scan_iter("account:*"):
       user = r.hgetall(key)
       if user["username"] == username:
-        return username
+        return user
     return None
 
   def check_password(self, user, password):
     if user["password"] == password:
-      return "Successfull login"
+      return "Successful login"
     return "Incorrect Password"
 
   def check_login(self, username, password):

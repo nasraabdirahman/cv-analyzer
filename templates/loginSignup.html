@@ -13,6 +13,17 @@
     <title>login</title>
 </head>
 <body>
+   {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash-message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
   <section class="container">
       <div class="input-container login">
         <form method="post" action="/login">

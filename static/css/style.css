@@ -132,3 +132,7 @@ footer {
     border-radius: 6px;
     text-align: center;
 }
+
+ul {
+  padding: 0px;
+}

@@ -2,7 +2,8 @@
     "name": "cv-analyser",
     "version": "1.0.0",
     "scripts": {
-        "test": "vitest"
+        "test": "vitest",
+        "test:ci": "vitest run"
     },
     "devDependencies": {
         "vitest": "^3.2.7"

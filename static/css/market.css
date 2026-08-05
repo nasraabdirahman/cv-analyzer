@@ -77,13 +77,3 @@ body {
     margin-top: 10px;
     color: #444;
 }
-
-.flash-message {
-    width: 700px;
-    margin: 20px auto;
-    padding: 12px;
-    background: #d4edda;
-    color: #155724;
-    border-radius: 6px;
-    text-align: center;
-}

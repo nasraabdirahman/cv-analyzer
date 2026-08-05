@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/loginSignup.css">
+    <script defer type="module" src="{{ url_for('static', filename='js/colourTheme.js')}}"></script>
+    <script defer src="../static/js/loginSignup.js"></script>
+    <title>login</title>
+</head>
+<body>
+   {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash-message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+  <section class="container">
+      <div class="input-container login">
+        <form method="post" action="/login">
+          <h2 class="h2 stack-sans-headline-title"> Login </h2>
+          <p class="p stack-sans-headline-mainText">Please fill in your details below!</p>
+          {% if errors %}
+            <ul>
+              {% for error in errors %}
+              <p class="p stack-sans-headline-mainText">
+                {{error}}
+              </p>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          <input type="username" name="username" placeholder="Username" maxlength="30">
+          <input type="password" name="password" placeholder="Password" maxlength="30">
+          <button class="standard-button" type="submit" >
+            Login
+          </button>
+        </form>
+      </div>
+
+    <div class="input-container signup">
+        <form method="post" action="/signup">
+          <h2 class="h2 stack-sans-headline-title"> Create Account</h2>
+          <p class="p stack-sans-headline-mainText">Please fill in your details below!</p>
+          <input type="text" name="firstName" placeholder="First Name" maxlength="30">
+          <input type="text" name="lastname" placeholder="LastName" maxlength="50">
+          <input type="text" name="companyName" placeholder="Company name" maxlength="50">
+          <input type="email" name="email" placeholder="Email" maxlength="50">
+          <input type="username" name="username" placeholder="Username" maxlength="30">
+          <input type="password" name="password" placeholder="Password" maxlength="30">
+          <input type="password" name="passwordR" placeholder="Repeat Password" maxlength="30">
+          <button class="standard-button" type="submit" >
+            Signup
+          </button>
+       </form>
+    </div>
+    <div class="toggle-container">
+      <div class="toggle">
+        <div class="toggle-panel toggle-right">
+            <h2 class="h2 stack-sans-headline-title"> Welcome Back </h2>
+            <p class="p stack-sans-headline-mainText">If you don't already have an account</p>
+            <button class="standard-button signup-button"> 
+              Signup 
+            </button>
+        </div>
+
+        <div class="toggle-panel toggle-left">
+            <h2 class="h2 stack-sans-headline-title"> New to Us </h2>
+            <p class="p stack-sans-headline-mainText">If you already have an account</p>
+            <button class="standard-button login-button"> 
+              Login
+            </button>
+        </div>
+      </div>
+    </div>
+  </section>
+    
+</body>
+</html>

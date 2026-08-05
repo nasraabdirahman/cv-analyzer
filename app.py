@@ -6,6 +6,8 @@ from services.job import Job
 from services.extractInfo import Extract_details
 from services.application import Job_application
 from services.validation import Validation
+from services.account import Company_account
+from services.login import LoginMethods
 from werkzeug.utils import secure_filename
 
 #creates a web aplication object
@@ -124,6 +126,45 @@ def apply(job_id):
         
         return redirect(url_for("market"))
     return render_template("apply.html", job=job)
+
+@app.route("/loginSignup", methods=["GET", "POST"])
+def loginSignup():
+    return render_template("loginSignup.html")
+
+@app.route("/login", methods=["POST"])
+def login():
+  if request.method == "POST":
+    errors = Validation.validate_login(request)
+    if errors :
+      return render_template("loginSignup.html", errors=errors)
+    
+  service = LoginMethods()
+  loginStatus = service.check_login(
+    request.form["username"],
+    request.form["password"],
+  )
+  if loginStatus != "Successful login":
+    flash(loginStatus)
+    return render_template("loginSignup.html")
+  return redirect(url_for("job_post"))
+
+@app.route("/signup", methods=["POST"])
+def signup():
+  errors = Validation.validate_signup(request)
+  if errors :
+    return render_template("loginSignup.html", errors=errors)
+
+  service = Company_account()
+  service.creating_account(
+    request.form["firstName"],
+    request.form["lastname"],
+    request.form["companyName"],
+    request.form["email"],
+    request.form["username"],
+    request.form["password"],
+  )
+  flash("Account Created") 
+  return redirect(url_for("loginSignup"))
 
 if __name__ == "__main__":
     # runs in http://127.0.0.1:5000

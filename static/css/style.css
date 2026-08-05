@@ -14,6 +14,7 @@
 :root{
   --primary-bg-colour: #E8ECEF;
   --secondary-colour: #405974;
+  --secondary-colour-rgb: 64 89 116;
 
   --first-accent-colour:  #80ABD3; /* #8EB1D1 */ 
   --second-accent-colour: #495B7D;
@@ -21,11 +22,12 @@
 }
 
 html[data-theme="dark"] {
-  --primary-bg-colour: #02122F;
-  --secondary-colour: #E8ECEF;
+ --primary-bg-colour: #02122F;
+  --secondary-colour: #e8ecef;
+  --secondary-colour-rgb: 232 236 239;
 
   --first-accent-colour: #8BA3C5;
-  --second-accent-colour: #495B7D;
+  --second-accent-colour: #455b84;
   --third-accent-colour: #405974;
 }
 
@@ -58,6 +60,7 @@ header{
   width: 15% ;
   padding: 18px 0px ;
   margin: 15px;
+  cursor: pointer;
 }
 
 .standard-button:hover{
@@ -120,15 +123,16 @@ footer {
   transition: transform 0.25s ease;
 }
 
-#pop-up{
-    height: 100vh;
-    width: 100vw;
-    background-color: var(--second-accent-colour);
-    position: absolute;
+.flash-message {
+    width: 700px;
+    margin: 20px auto;
+    padding: 12px;
+    background: #d4edda;
+    color: #155724;
+    border-radius: 6px;
+    text-align: center;
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    z-index: 1000;
+ul {
+  padding: 0px;
 }

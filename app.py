@@ -100,7 +100,7 @@ def apply(job_id):
     if request.method == "POST":
         errors = Validation.validate_application(request)
         if errors :
-            return render_template("apply.html", job=job, errors=errors)
+            return validation_failed(errors)
         
         cv = request.files["cv"]
         coverLetter = request.files["coverLetter"]
@@ -136,7 +136,7 @@ def login():
   if request.method == "POST":
     errors = Validation.validate_login(request)
     if errors :
-      return render_template("loginSignup.html", errors=errors)
+      return validation_failed(errors)
     
   service = LoginMethods()
   loginStatus = service.check_login(
@@ -146,13 +146,16 @@ def login():
   if loginStatus != "Successful login":
     flash(loginStatus)
     return render_template("loginSignup.html")
-  return redirect(url_for("job_post"))
+  return jsonify({
+				"message" : "Login Successful"
+	}), 200
+
 
 @app.route("/signup", methods=["POST"])
 def signup():
   errors = Validation.validate_signup(request)
   if errors :
-    return render_template("loginSignup.html", errors=errors)
+    return validation_failed(errors)
 
   service = Company_account()
   service.creating_account(
@@ -164,7 +167,15 @@ def signup():
     request.form["password"],
   )
   flash("Account Created") 
-  return redirect(url_for("loginSignup"))
+  return jsonify({
+      "message" : "Signup Successful"
+  }), 200
+
+def validation_failed(errors):
+    return jsonify({
+        "success" : False,
+        "errors" : errors
+    }), 400
 
 if __name__ == "__main__":
     # runs in http://127.0.0.1:5000

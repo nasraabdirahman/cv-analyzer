@@ -10,21 +10,24 @@
     <link rel="stylesheet" href="../static/css/loginSignup.css">
     <script defer type="module" src="{{ url_for('static', filename='js/colourTheme.js')}}"></script>
     <script defer src="../static/js/loginSignup.js"></script>
+    <script defer type="module" src="{{ url_for('static', filename='js/login.js')}}"></script>
     <title>login</title>
 </head>
 <body>
+  <div class="error-message">
    {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
-                <div class="flash-message">
+                  <p class="p stack-sans-headline-mainText flash-message">
                     {{ message }}
-                </div>
+                  </p>  
             {% endfor %}
         {% endif %}
     {% endwith %}
+  </div>
   <section class="container">
       <div class="input-container login">
-        <form method="post" action="/login">
+        <form method="post" action="/login" class="loginForm">
           <h2 class="h2 stack-sans-headline-title"> Login </h2>
           <p class="p stack-sans-headline-mainText">Please fill in your details below!</p>
           {% if errors %}
@@ -45,7 +48,7 @@
       </div>
 
     <div class="input-container signup">
-        <form method="post" action="/signup">
+        <form method="post" action="/signup" class="signupForm">
           <h2 class="h2 stack-sans-headline-title"> Create Account</h2>
           <p class="p stack-sans-headline-mainText">Please fill in your details below!</p>
           <input type="text" name="firstName" placeholder="First Name" maxlength="30">

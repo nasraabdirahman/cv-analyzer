@@ -1,11 +1,6 @@
 export function displayErrors(errors){
   const display = document.querySelector(".error-message") ;
-    
-  if (!display) {
-      console.error("No .flash-message element found.");
-      return;
-  }
-  
+
   display.innerHTML = "" ;
   errors.forEach(error => {
     const p = document.createElement("p") ;
@@ -13,4 +8,12 @@ export function displayErrors(errors){
     display.appendChild(p) ;
     
   });
+}
+
+export function display(response, data){
+  if(!response.ok){
+    displayErrors(data.errors || data.message);
+    console.log(displayErrors(data.errors || data.message));
+    return;
+  }
 }

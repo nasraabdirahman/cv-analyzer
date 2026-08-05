@@ -14,31 +14,14 @@
     <title>login</title>
 </head>
 <body>
-  <div class="error-message">
-   {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                  <p class="p stack-sans-headline-mainText flash-message">
-                    {{ message }}
-                  </p>  
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+  <div class="errorDiv">
+    <div class="error-message"> </div>
   </div>
   <section class="container">
       <div class="input-container login">
         <form method="post" action="/login" class="loginForm">
           <h2 class="h2 stack-sans-headline-title"> Login </h2>
           <p class="p stack-sans-headline-mainText">Please fill in your details below!</p>
-          {% if errors %}
-            <ul>
-              {% for error in errors %}
-              <p class="p stack-sans-headline-mainText">
-                {{error}}
-              </p>
-              {% endfor %}
-            </ul>
-          {% endif %}
           <input type="username" name="username" placeholder="Username" maxlength="30">
           <input type="password" name="password" placeholder="Password" maxlength="30">
           <button class="standard-button" type="submit" >
@@ -83,6 +66,18 @@
       </div>
     </div>
   </section>
-    
+  <footer>
+    <h2 class="footer-text stack-sans-headline-title "> Contact </h2>
+    <a class="main-body-text-link stack-sans-headline-mainText" href="https://github.com/nasraabdirahman/cv-analyzer"> https://github.com/nasraabdirahman/cv-analyzer </a>
+    <section class="colour-scheme-switcher" aria-label="colour-scheme-switcher">
+      <span class="scheme-switcher_slider"></span>
+        <button class="scheme-switcher_button stack-sans-headline-mainText" aria-pressed="false" value="light">
+          Light
+        </button>
+        <button class="scheme-switcher_button stack-sans-headline-mainText" aria-pressed="false" value="dark">
+          Dark
+        </button>
+    </section>
+  </footer>
 </body>
 </html>

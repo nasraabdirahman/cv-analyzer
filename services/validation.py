@@ -10,25 +10,25 @@ class Validation:
 		phonenumber = request.form.get("phonenumber", "").strip()
 
 		if not firstName:
-				errors.append("First name is a required field")
+			errors.append("First name is a required field")
 		
 		if not lastname:
-				errors.append("Lastname is a required field")
+			errors.append("Lastname is a required field")
 
 		pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}"
 		if not (re.match(pattern, email)) :
-				errors.append("Email is a required field")
+			errors.append("Email is a required field")
 
 		if not (phonenumber.isdigit() and len(phonenumber) >= 8 ) :
-				errors.append("Phonenumber is a required field")
+			errors.append("Phonenumber is a required field")
 
 		cv = request.files.get("cv")
-		if cv is None :
-				errors.append("CV is a required field")
+		if cv is None or cv.filename == "" :
+			errors.append("CV is a required field")
 		
 		coverLetter = request.files.get("coverLetter")
-		if coverLetter is None :
-				errors.append("Cover letter is a required field")
+		if coverLetter is None or coverLetter.filename == ""  :
+			errors.append("Cover letter is a required field")
 
 		return errors 
 

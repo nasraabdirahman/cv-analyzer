@@ -13,7 +13,6 @@ export function displayErrors(errors){
 export function display(response, data){
   if(!response.ok){
     displayErrors(data.errors || data.message);
-    console.log(displayErrors(data.errors || data.message));
     return;
   }
 }

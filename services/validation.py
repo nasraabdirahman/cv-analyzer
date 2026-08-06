@@ -6,18 +6,10 @@ class Validation:
 		errors = []
 		firstName = request.form.get("firstName", "").strip()
 		lastname = request.form.get("lastname", "").strip()
-		email = request.form.get("email", "").strip()
 		phonenumber = request.form.get("phonenumber", "").strip()
-
-		if not firstName:
-				errors.append("First name is a required field")
-		
-		if not lastname:
-				errors.append("Lastname is a required field")
-
-		pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}"
-		if not (re.match(pattern, email)) :
-				errors.append("Email is a required field")
+		Validation.emptyCheck("firstName", firstName, errors)
+		Validation.emptyCheck("lastname", lastname, errors)
+		Validation.emailCheck(request, errors)
 
 		if not (phonenumber.isdigit() and len(phonenumber) >= 8 ) :
 				errors.append("Phonenumber is a required field")
@@ -37,25 +29,12 @@ class Validation:
 		errors = []
 		firstName = request.form.get("firstName", "").strip()
 		lastname = request.form.get("lastname", "").strip()
-		companyName = request.form.get("companyName", "").strip()
-		email = request.form.get("email", "").strip()
 		password = request.form.get("password", "").strip()
 		passwordRepeat = request.form.get("passwordR", "").strip()
-
-		if not firstName:
-			errors.append("First name is a required field")
-				
-		if not lastname:
-			errors.append("Lastname is a required field")
-
-		if not companyName:
-					errors.append("Company is a required field")
-
-		pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}"
-		if not (re.match(pattern, email)) :
-			errors.append("Email is a required field")
-
+		Validation.emptyCheck("firstName", firstName, errors)
+		Validation.emptyCheck("lastname", lastname, errors)
 		errors.extend(Validation.validate_login(request))
+		Validation.emailCheck(request, errors)
 
 		if password != passwordRepeat :
 			errors.append("passwords do not match")
@@ -67,11 +46,18 @@ class Validation:
 		errors = []
 		username = request.form.get("username", "").strip()
 		password = request.form.get("password", "").strip()
-
-		if not username:
-			errors.append("Username is a required field")
-		
-		if not password:
-			errors.append("Password is a required field")
-
+		Validation.emptyCheck("username", username, errors)
+		Validation.emptyCheck("password", password, errors)
 		return errors
+
+	@staticmethod
+	def emptyCheck(field_name, data, errors):
+		if not data:
+			errors.append(f"{field_name} is a required field")
+
+	@staticmethod
+	def emailCheck(request, errors):
+		email = request.form.get("email", "").strip()
+		pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,7}"
+		if not (re.match(pattern, email)) :
+				errors.append("email is a required field")

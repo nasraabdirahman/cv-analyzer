@@ -18,4 +18,23 @@ class Extract_details:
     def get_job(job_id):
         #return just the id for the routing
         return r.hgetall(f"job:{job_id}")
-        
+
+    @staticmethod
+    def get_account(account_id):
+        return r.hgetall(f"account:{account_id}")
+
+    @staticmethod
+    def get_company_jobs(account_id):
+        companyKey = f"account:{account_id}"
+        companyName = r.hget(companyKey, "companyName")
+
+        if companyName is None:
+            return []
+
+        jobs = []
+        for key in r.keys("companyName:*"):
+            job = r.hgetall(key)
+            #include the job_id in the list
+            job["id"] = key.split(":")[1] 
+            jobs.append(job)
+        return jobs 

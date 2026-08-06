@@ -7,6 +7,7 @@ from services.extractInfo import Extract_details
 from services.application import Job_application
 from services.validation import Validation
 from services.account import Company_account
+from services.company import Company_schema
 from services.login import LoginMethods
 from werkzeug.utils import secure_filename
 
@@ -76,7 +77,7 @@ def job_post():
     if request.method == "POST":
         service = Job()
         service.creating_job(
-            request.form["company"],
+            request.form["companyName"],
             request.form["title"],
             request.form["location"],
             request.form["shortDescription"],
@@ -155,16 +156,26 @@ def signup():
     return render_template("loginSignup.html", errors=errors)
 
   service = Company_account()
-  service.creating_account(
+  account_id = service.creating_account(
     request.form["firstName"],
     request.form["lastname"],
-    request.form["companyName"],
     request.form["email"],
     request.form["username"],
     request.form["password"],
   )
+  service = Company_schema()
+  service.companyDB(
+      request.form["companyName"],
+      account_id,
+  )
   flash("Account Created") 
   return redirect(url_for("loginSignup"))
+
+@app.route("/companyView/<account_id>")
+def companyView(account_id):
+    account = Extract_details.get_account(account_id)
+    jobs = Extract_details.get_company_jobs(account_id)
+    return render_template("companyView.html", account=account, jobs=jobs)
 
 if __name__ == "__main__":
     # runs in http://127.0.0.1:5000

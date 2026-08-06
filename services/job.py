@@ -7,11 +7,11 @@ r = db.db_connection()
 
 class Job:
     #create a job annonce
-    def creating_job(self, company, title, location, shortDescription, longDescription, releaseDate, removalDate, startDate):
+    def creating_job(self, companyName, title, location, shortDescription, longDescription, releaseDate, removalDate, startDate):
         job_id = r.incr("next_job_id")
         removal_timestamp = int(datetime.strptime(removalDate, "%Y-%m-%d").timestamp())
         r.hset (f"job:{job_id}", mapping={
-            'company': company,
+            'companyName': companyName,
             'title': title,
             'location': location,
             'shortDescription': shortDescription,

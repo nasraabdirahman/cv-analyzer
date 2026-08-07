@@ -77,7 +77,7 @@ def job_post():
     if request.method == "POST":
         service = Job()
         service.creating_job(
-            request.form["companyName"],
+            request.form["company"],
             request.form["title"],
             request.form["location"],
             request.form["shortDescription"],

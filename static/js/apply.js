@@ -1,7 +1,8 @@
 import { display } from "./errorDisplay.js";
-import { displayTimer } from "./listingTimer.js";
+import { timer } from "./listingTimer.js";
 
-displayTimer(job);
+const daysLeft = document.getElementById("days-left");
+daysLeft.textContent = timer(job.removalDate, new Date()); 
 
 const expandableSection = document.querySelector(".expandable-section");
 const applyForm = document.querySelector("form.applyForm") ;

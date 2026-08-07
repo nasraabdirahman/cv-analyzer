@@ -16,6 +16,7 @@ class Extract_details:
         return jobs
     @staticmethod
     def get_job(job_id):
-        #return just the id for the routing
-        return r.hgetall(f"job:{job_id}")
+        job = r.hgetall(f"job:{job_id}")
+        job["id"] = job_id
+        return job
         

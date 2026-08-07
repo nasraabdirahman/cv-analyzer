@@ -9,9 +9,9 @@
   <link rel="stylesheet" href="../static/css/style.css">
   <link rel="stylesheet" href="../static/css/apply.css">
   <script defer type="module" src="{{ url_for('static', filename='js/colourTheme.js')}}"></script>
-  <script defer src="../static/js/applyButton.js"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/apply.js')}}"></script>
   <script > const job = {{job | tojson}}; </script>
-  <script defer type="module" src="../static/js/listingTimer.js"></script>
+  <script defer type="module" src="{{ url_for('static', filename='js/listingTimer.js')}}"></script>
   <title>Full Job-Description</title>
 </head>
 <body>
@@ -42,20 +42,12 @@
           <p id="days-left" class="stack-sans-headline-title"> </p>
         </div>
       </div>
-      <form  method="POST" enctype="multipart/form-data">
+      <form method="POST" enctype="multipart/form-data" action="/job/{{job['id']}}" class="applyForm">
         <section class="expandable-section {% if errors %}expandable-section--open{% endif %}">
           <div class="expandable-content">
             <h3 class="text stack-sans-headline-title"> Application </h3>
             <h6 class="text stack-sans-headline-mainText"> Please include the following information </h6>
-            {% if errors %}
-                <ul>
-                  {% for error in errors %}
-                  <p class="text stack-sans-headline-mainText">
-                    {{error}}
-                  </p>
-                  {% endfor %}
-                </ul>
-              {% endif %}
+            <div class="error-message"> </div>
             <div class="input-container-name">
               <input class="input-small stack-sans-headline-mainText" name="firstName" type="text" spellcheck="true" maxlength="30" placeholder="First Name"> 
               <input class="input-small stack-sans-headline-mainText" name="lastname" type="text" spellcheck="true" maxlength="30" placeholder="Lastname">

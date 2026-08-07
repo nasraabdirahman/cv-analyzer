@@ -98,33 +98,34 @@ def market():
 def apply(job_id):
     job = Extract_details.get_job(job_id)
     if request.method == "POST":
-        errors = Validation.validate_application(request)
-        if errors :
-            return render_template("apply.html", job=job, errors=errors)
-        
-        cv = request.files["cv"]
-        coverLetter = request.files["coverLetter"]
+      errors = Validation.validate_application(request)
+      if errors :
+        return validation_failed(errors)
+      
+      cv = request.files["cv"]
+      coverLetter = request.files["coverLetter"]
 
-        cv_filename =secure_filename(cv.filename)
-        coverLetter_filename =secure_filename(coverLetter.filename)
+      cv_filename =secure_filename(cv.filename)
+      coverLetter_filename =secure_filename(coverLetter.filename)
 
-        cv.save(os.path.join("uploads", cv_filename))
-        coverLetter.save(os.path.join("uploads", coverLetter_filename))
-        
-        service = Job_application()
-        service.creating_application(
-            job_id,
-            request.form["firstName"],
-            request.form["lastname"],
-            request.form["phonenumber"],
-            request.form["email"],
-            cv_filename,
-            coverLetter_filename
-        )
-        r.hincrby(f"job:{job_id}", "applyCounter", 1)  # fixes incrementation                
-        flash("Application Created") 
-        
-        return redirect(url_for("market"))
+      cv.save(os.path.join("uploads", cv_filename))
+      coverLetter.save(os.path.join("uploads", coverLetter_filename))
+      
+      service = Job_application()
+      service.creating_application(
+          job_id,
+          request.form["firstName"],
+          request.form["lastname"],
+          request.form["phonenumber"],
+          request.form["email"],
+          cv_filename,
+          coverLetter_filename
+      )
+      r.hincrby(f"job:{job_id}", "applyCounter", 1)  # fixes incrementation                
+      
+      return jsonify({
+        "message" : "Application Created"
+      }), 200
     return render_template("apply.html", job=job)
 
 @app.route("/loginSignup", methods=["GET", "POST"])
@@ -136,7 +137,7 @@ def login():
   if request.method == "POST":
     errors = Validation.validate_login(request)
     if errors :
-      return render_template("loginSignup.html", errors=errors)
+      return validation_failed(errors)
     
   service = LoginMethods()
   loginStatus = service.check_login(
@@ -144,15 +145,19 @@ def login():
     request.form["password"],
   )
   if loginStatus != "Successful login":
-    flash(loginStatus)
-    return render_template("loginSignup.html")
-  return redirect(url_for("job_post"))
+    return jsonify({
+        "errors" : [loginStatus]
+      }), 400
+  return jsonify({
+	  "message" : "Login Successful"
+  }), 200
+
 
 @app.route("/signup", methods=["POST"])
 def signup():
   errors = Validation.validate_signup(request)
   if errors :
-    return render_template("loginSignup.html", errors=errors)
+    return validation_failed(errors)
 
   service = Company_account()
   service.creating_account(
@@ -164,7 +169,15 @@ def signup():
     request.form["password"],
   )
   flash("Account Created") 
-  return redirect(url_for("loginSignup"))
+  return jsonify({
+      "message" : "Signup Successful"
+  }), 200
+
+def validation_failed(errors):
+    return jsonify({
+        "success" : False,
+        "errors" : errors
+    }), 400
 
 if __name__ == "__main__":
     # runs in http://127.0.0.1:5000

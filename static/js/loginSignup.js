@@ -1,3 +1,4 @@
+import { display } from "./errorDisplay.js";
 const container = document.querySelector(".container");
 const signupBtn = document.querySelector(".signup-button");
 const loginBtn = document.querySelector(".login-button");
@@ -8,4 +9,33 @@ signupBtn.addEventListener('click', ()=>{
 
 loginBtn.addEventListener('click', ()=>{
 	container.classList.remove("active");
+});
+
+const formL = document.querySelector("form.loginForm") ;
+const formS = document.querySelector("form.signupForm") ;
+
+formL.addEventListener("submit", async(event) => {
+	event.preventDefault();
+	const response = await fetch(formL.action, {
+		method: "POST",
+		body: new FormData(formL)
+	});
+	const data = await response.json();
+	display(response, data);
+	if(response.ok){
+		window.location.href = "/create";
+	}
+});
+
+formS.addEventListener("submit", async(event) => {
+	event.preventDefault();
+	const response = await fetch(formS.action, {
+		method: "POST",
+		body: new FormData(formS)
+	});
+	const data = await response.json();
+	display(response, data);
+	if(response.ok){
+		window.location.href = "/loginSignup";
+	}
 });

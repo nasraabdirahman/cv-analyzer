@@ -42,7 +42,7 @@
           <p id="days-left" class="stack-sans-headline-title"> </p>
         </div>
       </div>
-      <form method="POST" enctype="multipart/form-data" class="applyForm">
+      <form method="POST" enctype="multipart/form-data" action="/job/{{job['id']}}" class="applyForm">
         <section class="expandable-section {% if errors %}expandable-section--open{% endif %}">
           <div class="expandable-content">
             <h3 class="text stack-sans-headline-title"> Application </h3>

@@ -1,0 +1,17 @@
+.display-jobs{
+  border: 1px solid var(--first-accent-colour);
+  width: 60%;
+  border-radius: 20px;
+  box-shadow:2px 2px 5px 2px var(--first-accent-colour);
+
+}
+.display-jobs p{
+  margin: 5px;
+}
+
+.title-text{
+  font-size: 26px;
+  padding: 10px;
+  margin: 10px 0 0 0;
+}
+

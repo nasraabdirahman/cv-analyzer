@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&display=swap" rel="stylesheet">
+  <!--<script > const account = {{account | tojson}}; </script>-->
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="../static/css/companyView.css">
+  <script defer type="module" src="{{ url_for('static', filename='js/colourTheme.js')}}"></script>
+  <title>Company View</title>
+</head>
+<body>
+  <div class="centered">
+    <section class="display-jobs centered">
+      <h2 class="title-text stack-sans-headline-title"> Current Job Listings </h2>
+      <p class="stack-sans-headline-mainText"> Current job listings posted by {{ account["companyName"] }} </p>
+      {% for job in jobs %}
+        <div class="container">
+          {{job["title"]}}
+        </div>
+      {% endfor %}
+    </section>
+    
+  
+  </div>
+  <footer>
+    <h2 class="footer-text stack-sans-headline-title "> Contact </h2>
+    <a class="main-body-text-link stack-sans-headline-mainText" href="https://github.com/nasraabdirahman/cv-analyzer"> https://github.com/nasraabdirahman/cv-analyzer </a>
+    <section class="colour-scheme-switcher" aria-label="colour-scheme-switcher">
+      <span class="scheme-switcher_slider"></span>
+        <button class="scheme-switcher_button stack-sans-headline-mainText" aria-pressed="false" value="light">
+          Light
+        </button>
+        <button class="scheme-switcher_button stack-sans-headline-mainText" aria-pressed="false" value="dark">
+          Dark
+        </button>
+    </section>
+  </footer>
+</body>
+</html>

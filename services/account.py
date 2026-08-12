@@ -15,3 +15,7 @@ class Company_account:
             'password': password,
         })
         return account_id
+
+    @staticmethod
+    def get_account(account_id):
+      return r.hgetall(f"account:{account_id}")

@@ -6,7 +6,7 @@ from services.job import Job
 from services.extractInfo import Extract_details
 from services.application import Job_application
 from services.validation import Validation
-from services.account import Company_account
+from services.company import Company_account
 from services.login import LoginMethods
 from werkzeug.utils import secure_filename
 

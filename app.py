@@ -175,6 +175,10 @@ def signup():
 def companyView(account_id):
     account = Extract_details.get_account(account_id)
     jobs = Extract_details.get_company_jobs(account_id)
+    if not jobs :
+        return jsonify({
+            "error" : "No jobs found"
+        }), 404
     return render_template("companyView.html", account=account, jobs=jobs)
 
 if __name__ == "__main__":

@@ -4,11 +4,9 @@ class Validation:
 	@staticmethod
 	def validate_application(request):
 		errors = []
-		firstName = request.form.get("firstName", "").strip()
-		lastname = request.form.get("lastname", "").strip()
 		phonenumber = request.form.get("phonenumber", "").strip()
-		Validation.emptyCheck("firstName", firstName, errors)
-		Validation.emptyCheck("lastname", lastname, errors)
+		Validation.emptyCheck("firstName", errors)
+		Validation.emptyCheck("lastname", errors)
 		Validation.emailCheck(request, errors)
 
 		if not (phonenumber.isdigit() and len(phonenumber) >= 8 ) :
@@ -27,12 +25,10 @@ class Validation:
 	@staticmethod
 	def validate_signup(request):
 		errors = []
-		firstName = request.form.get("firstName", "").strip()
-		lastname = request.form.get("lastname", "").strip()
 		password = request.form.get("password", "").strip()
 		passwordRepeat = request.form.get("passwordR", "").strip()
-		Validation.emptyCheck("firstName", firstName, errors)
-		Validation.emptyCheck("lastname", lastname, errors)
+		Validation.emptyCheck("firstName", errors)
+		Validation.emptyCheck("lastname", errors)
 		errors.extend(Validation.validate_login(request))
 		Validation.emailCheck(request, errors)
 
@@ -44,14 +40,13 @@ class Validation:
 	@staticmethod
 	def validate_login(request):
 		errors = []
-		username = request.form.get("username", "").strip()
-		password = request.form.get("password", "").strip()
-		Validation.emptyCheck("username", username, errors)
-		Validation.emptyCheck("password", password, errors)
+		Validation.emptyCheck("username", errors)
+		Validation.emptyCheck("password", errors)
 		return errors
 
 	@staticmethod
-	def emptyCheck(field_name, data, errors):
+	def emptyCheck(request, field_name, errors):
+		data = request.form.get("{field_name}", "").strip()
 		if not data:
 			errors.append(f"{field_name} is a required field")
 

@@ -25,8 +25,10 @@ class Extract_details:
 
     @staticmethod
     def get_company_jobs(account_id):
+        print(account_id)
         companyKey = f"account:{account_id}"
         companyName = r.hget(companyKey, "companyName")
+        print(companyName)
 
         if companyName is None:
             return []

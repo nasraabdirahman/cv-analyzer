@@ -2,23 +2,21 @@ from database.redisClient import db
 
 r = db.db_connection()
 
-class LoginMethods :
-  def find_user(self, username):
-    for key in r.scan_iter("account:*"):
+class LoginMethods : 
+  def check_login_company(self, username, password): #exceptions
+    for key in r.scan_iter(f"account:*"):
       user = r.hgetall(key)
       if user["username"] == username:
-        return user
-    return None
+        if user["password"] == password:
+          return "Successful login"
+        return "Incorrect Password"
+      return "no user found"
 
-  def check_password(self, user, password):
-    if user["password"] == password:
-      return "Successful login"
-    return "Incorrect Password"
-
-  def check_login(self, username, password):
-    user = self.find_user(username)
-
-    if user is None :
-      return "No user found"
-
-    return self.check_password(user, password)
+  def check_login_application(self, username, password): #exceptions
+      for key in r.scan_iter(f"application:*"):
+        user = r.hgetall(key)
+        if user["username"] == username:
+          if user["password"] == password:
+            return "Successful login"
+          return "Incorrect Password"
+        return "no user found"

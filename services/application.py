@@ -2,7 +2,6 @@ from database.redisClient import db
 
 r = db.db_connection()
 
-
 class Job_application:
     #create a job application
     def creating_application(self, job_id, firstName, lastname, phonenumber, email, cv_filename, coverLetter_filename):

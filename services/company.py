@@ -2,16 +2,16 @@ from database.redisClient import db
 
 r = db.db_connection()
 
-class Company_account:
-	def creating_company(self, companyName):
+class CompanyRepoService:
+	def creating_company(self, name):
 		id = r.incr("next_company_id")
 		r.hset (f"company:{id}", mapping={
-			'companyName': companyName,
+			'name': name,
 		})
 		return id
 
   #create an account used for authorisation for creating jobs
-	def creating_account(self, firstName, lastname, companyName, email, username, password):
+	def creating_account(self, firstName, lastname, email, username, password):
 		account_id = r.incr("next_account_id")
 		r.hset (f"company:{id}, account:{account_id}", mapping={
 				'firstName': firstName,
@@ -25,4 +25,5 @@ class Company_account:
 	
 	@staticmethod
 	def get_account(account_id):
-		return r.hgetall(f"company:*, account:{account_id}")
+		key = r.scan_iter(f"company:*, account:{account_id}")
+		return next(key)

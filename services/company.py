@@ -16,9 +16,13 @@ class Company_account:
 		r.hset (f"company:{id}, account:{account_id}", mapping={
 				'firstName': firstName,
 				'lastname': lastname,
-				'companyName': companyName,
 				'email': email,
 				'username': username,
 				'password': password,
 		})
 		return account_id
+
+	
+	@staticmethod
+	def get_account(account_id):
+		return r.hgetall(f"company:*, account:{account_id}")

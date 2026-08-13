@@ -7,9 +7,6 @@ const slider = document.querySelector('.scheme-switcher_slider');
 const savedTheme = getCookie("theme");
 if(savedTheme) {
   document.documentElement.dataset.theme = savedTheme ;
-  if (colourScheme){
-    colourScheme.content = savedTheme  ;
-  }
 
   switchButtons.forEach((button, index) => {
     if(button.value === savedTheme) {
@@ -31,11 +28,7 @@ switchButtons.forEach((button, index) => {
 
     slider.style.transform = `translateX(${index * 100}%)`;
 
-    if (colourScheme) {
-      colourScheme.content = button.value;
-    }
     document.documentElement.dataset.theme = button.value;
     document.cookie = `theme=${button.value}; path=/; `
-    console.log(colourScheme);
   });
 });

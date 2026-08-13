@@ -2,11 +2,11 @@ import os
 from database.redisClient import db
 from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from ollama import generate
-from services.job import Job
+from services.repository.redis.job import Job
 from services.extractInfo import Extract_details
-from services.application import Job_application
+from services.repository.redis.application import Job_application
 from services.validation import Validation
-from services.account import Company_account
+from services.repository.redis.company import CompanyRepoService
 from services.login import LoginMethods
 from werkzeug.utils import secure_filename
 
@@ -159,7 +159,7 @@ def signup():
   if errors :
     return validation_failed(errors)
 
-  service = Company_account()
+  service = CompanyRepoService()
   service.creating_account(
     request.form["firstName"],
     request.form["lastname"],
@@ -175,7 +175,8 @@ def signup():
 
 @app.route("/companyView/<account_id>")
 def companyView(account_id):
-    account = Company_account.get_account(account_id)
+    account = CompanyRepoService.get_account(account_id)
+    print(1)
     # jobs = Extract_details.get_company_jobs(account_id)
     # if not jobs :
     #    return jsonify({

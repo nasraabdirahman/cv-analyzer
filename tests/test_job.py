@@ -1,4 +1,4 @@
-from services.job import Job
+from services.repository.redis.job import Job
 
 
 def test_job(mocker): 

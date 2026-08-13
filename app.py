@@ -2,11 +2,11 @@ import os
 from database.redisClient import db
 from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash, jsonify
 from ollama import generate
-from services.job import Job
+from services.repository.redis.job import Job
 from services.extractInfo import Extract_details
-from services.application import Job_application
+from services.repository.redis.application import Job_application
 from services.validation import Validation
-from services.company import CompanyRepoService
+from services.repository.redis.company import CompanyRepoService
 from services.login import LoginMethods
 from werkzeug.utils import secure_filename
 
